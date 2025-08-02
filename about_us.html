@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About Us - TiffinFinder</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      background: linear-gradient(135deg, #fff8e1, #ffe0b2, #fff3e0);
+      background-attachment: fixed;
+      color: #333;
+    }
+
+    .about-section {
+      max-width: 1100px;
+      margin: 0 auto;
+      background: white;
+      padding: 60px 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.08);
+      margin-top: 50px;
+      margin-bottom: 50px;
+    }
+
+    .about-section h1 {
+      font-size: 2.8rem;
+      color: #5D4037;
+      margin-bottom: 35px;
+      text-align: center;
+      position: relative;
+      font-weight: 600;
+      animation: fadeInDown 0.8s ease-in-out;
+    }
+
+    .about-section h1::after {
+      content: '';
+      display: block;
+      width: 80px;
+      height: 4px;
+      background: #ffcc80;
+      margin: 12px auto 0;
+      border-radius: 2px;
+    }
+
+    .section-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      margin-top: 40px;
+      gap: 30px;
+    }
+
+    .section-text {
+      flex: 1;
+      min-width: 260px;
+    }
+
+    .section-text h2 {
+      font-size: 1.7rem;
+      color: #4E342E;
+      margin-bottom: 15px;
+      border-left: 5px solid #ffcc80;
+      padding-left: 15px;
+    }
+
+    .section-text p,
+    .section-text ul {
+      font-size: 1.05rem;
+      color: #555;
+    }
+
+    .section-image {
+      flex: 1;
+      min-width: 260px;
+      text-align: center;
+    }
+
+    .section-image img {
+      width: 100%;
+      max-width: 300px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .about-section ul {
+      list-style: none;
+      padding-left: 0;
+      margin-top: 10px;
+    }
+
+    .about-section ul li {
+      margin-bottom: 12px;
+      display: flex;
+      align-items: flex-start;
+    }
+
+    .about-section ul li::before {
+      content: "✯";
+      color: #43a047;
+      margin-right: 10px;
+      font-size: 1.1rem;
+    }
+
+    .highlight-box {
+      background: #fff3e0;
+      border-left: 5px solid #ff9800;
+      padding: 18px 20px;
+      margin-top: 25px;
+      font-size: 1rem;
+      color: #6d4c41;
+      border-radius: 8px;
+    }
+
+    .cta-box {
+      text-align: center;
+      margin-top: 60px;
+      background: linear-gradient(to right, #ffb74d, #ffe082);
+      padding: 30px 25px;
+      border-radius: 12px;
+      box-shadow: 0 6px 12px rgba(255, 152, 0, 0.2);
+    }
+
+    .cta-box h3 {
+      font-size: 1.9rem;
+      color: #4E342E;
+      margin-bottom: 15px;
+    }
+
+    .cta-box p {
+      font-size: 1.1rem;
+      color: #4e342e;
+      margin: 5px 0;
+    }
+
+    @media (max-width: 768px) {
+      .about-section h1 {
+        font-size: 2rem;
+      }
+
+      .section-row {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .section-text h2 {
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navbar with Hamburger Menu (No Search) -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet"/>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-searchbar">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="index.html">TiffinFinder</a>
+
+    <!-- Menu -->
+    <div class="dropdown ms-auto me-3">
+      <button class="btn text-white border-0" type="button" id="menuToggle" data-bs-toggle="dropdown" aria-expanded="false">
+        <i class="fas fa-bars fa-lg"></i>
+      </button>
+      <ul class="dropdown-menu dropdown-menu-end animate__animated animate__fadeIn" aria-labelledby="menuToggle">
+        <li><a class="dropdown-item custom-dropdown-item" href="about_us.html">About Us</a></li>
+        <li><a class="dropdown-item custom-dropdown-item" href="contact.html">Contact Us</a></li>
+        <li><a class="dropdown-item custom-dropdown-item" href="terms.html">Terms & Conditions</a></li>
+        <li><a class="dropdown-item custom-dropdown-item" href="#">Feedback</a></li>
+      </ul>
+    </div>
+
+    <!-- Sign In -->
+    <div class="d-flex">
+      <button class="btn signin-btn" onclick="handleGoogleSignIn()">Sign In</button>
+    </div>
+  </div>
+</nav>
+
+<style>
+  .sticky-searchbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: #212529;
+    padding: 10px 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  .signin-btn {
+    color: #fff;
+    background-color: #ef6c00;
+    border: none;
+    border-radius: 8px;
+    padding: 6px 14px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: background-color 0.2s;
+  }
+  .signin-btn:hover {
+    background-color: #e65100;
+  }
+  .custom-dropdown-item {
+    transition: all 0.3s ease-in-out;
+    padding-left: 16px;
+  }
+  .custom-dropdown-item:hover {
+    background-color: #ef6c00;
+    color: white;
+    padding-left: 24px;
+  }
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<script>
+  function handleGoogleSignIn() {
+    google.accounts.id.initialize({
+      client_id: "537791541680-ljot858jb47ram44dfjcthgjlhk8704h.apps.googleusercontent.com",
+      callback: handleCredentialResponse
+    });
+    google.accounts.id.prompt(); // triggers the popup
+  }
+
+  function handleCredentialResponse(response) {
+    console.log("Encoded JWT ID token: " + response.credential);
+    window.location.href = "profile.html"; // Redirect to profile page
+  }
+</script>
+
+
+<section class="about-section">
+  <h1>About Us – TiffinFinder</h1>
+
+  <div class="section-row">
+    <div class="section-text">
+      <h2>Who We Are</h2>
+      <p>
+        TiffinFinder is a user-friendly online platform designed to bridge the gap between local tiffin/mess services and people looking for daily, hygienic, and affordable meals.
+        Whether you're a student, working professional, or just someone in need of homemade food, we make it easy for you to discover and connect with verified mess providers in your area.
+      </p>
+    </div>
+    <div class="section-image">
+      <img src="about_image.png" alt="Homemade Tiffin Box">
+    </div>
+  </div>
+
+  <div class="section-row">
+    <div class="section-text">
+      <h2>Our Mission</h2>
+      <ul>
+        <li>To empower local mess owners by giving them digital visibility.</li>
+        <li>To help customers find reliable and healthy meal options quickly and easily.</li>
+        <li>To create a community-driven food discovery platform focused on trust, quality, and convenience.</li>
+      </ul>
+    </div>
+    <div class="section-image">
+      <img src="mission.jpg" alt="Our Mission">
+    </div>
+  </div>
+
+  <div class="section-row">
+    <div class="section-text">
+      <h2>What We Do</h2>
+      <ul>
+        <li>List and promote verified mess/tiffin providers.</li>
+        <li>Let customers browse menus, prices, and reviews before choosing a service.</li>
+        <li>Provide location-based search to show mess options near you.</li>
+        <li>Enable direct contact or lead generation between customer and provider.</li>
+      </ul>
+    </div>
+    <div class="section-image">
+      <img src="services.jpg" alt="Our Services">
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <strong>Note:</strong> We do not cook or deliver food. We simply connect those who offer meals with those who need them.
+  </div>
+
+  <div class="section-row">
+    <div class="section-text">
+      <h2>Why Choose TiffinFinder?</h2>
+      <ul>
+        <li>🔍 Easy discovery of nearby mess services</li>
+        <li>🤝 Transparent connection with service providers</li>
+        <li>📍 Location-based search experience</li>
+        <li>🌱 Ideal for students, office-goers, and hostellers</li>
+        <li>🚀 Helping small local kitchens go digital</li>
+      </ul>
+    </div>
+    <div class="section-image">
+      <img src="why choose.jpg" alt="Why Choose Us">
+    </div>
+  </div>
+
+  <div class="cta-box">
+    <h3>Want to List Your Tiffin Service?</h3>
+    <p>Join hundreds of local mess owners growing their business with TiffinFinder.</p>
+    <p>It’s easy, free, and helps you reach the right audience in your city.</p>
+  </div>
+</section>
+
+<!--------------------------------------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------------------------------->
+
+
+<!-- Section: Footer -->
+<style>
+  .footer {
+    background: #212121;
+    color: #f5f5f5;
+    padding: 60px 20px 30px;
+    font-family: 'Segoe UI', sans-serif;
+  }
+
+  .footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 190px;
+    max-width: 1200px;
+    margin: auto;
+    text-align: left;
+  }
+
+  .footer-logo {
+    flex: 1;
+    min-width: 240px;
+  }
+
+  .footer-logo h2 {
+    color: #ffab00;
+    margin-bottom: 10px;
+  }
+
+  .footer-logo p {
+    font-size: 0.95rem;
+    color: #bdbdbd;
+  }
+
+  .footer-listing-cta {
+    flex: 1;
+    min-width: 260px;
+    background: #424242;
+    padding: 25px 20px;
+    border-radius: 10px;
+    text-align: center;
+  }
+
+  .footer-listing-cta h3 {
+    color: #ffcc80;
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+  }
+
+  .footer-listing-cta p {
+    font-size: 0.95rem;
+    color: #e0e0e0;
+    margin-bottom: 15px;
+  }
+
+  .footer-listing-cta a {
+    display: inline-block;
+    padding: 10px 18px;
+    background: #ffab00;
+    color: #212121;
+    font-weight: 600;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: 0.3s;
+  }
+
+  .footer-listing-cta a:hover {
+    background: #ff8f00;
+  }
+
+  .footer-links {
+    flex: 1;
+    min-width: 240px;
+  }
+
+  .footer-links h3 {
+    color: #ffab00;
+    margin-bottom: 15px;
+  }
+
+  .footer-links a {
+    display: block;
+    color: #e0e0e0;
+    font-size: 0.95rem;
+    text-decoration: none;
+    margin-bottom: 10px;
+    transition: 0.3s;
+  }
+
+  .footer-links a:hover {
+    color: #ffcc80;
+  }
+
+  .footer-bottom {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 0.85rem;
+    color: #9e9e9e;
+  }
+</style>
+
+<div class="footer">
+  <div class="footer-container">
+
+    <!-- Left: Logo + Text -->
+    <div class="footer-logo">
+      <h2>TiffinWala</h2>
+      <p>Connecting you to the best home-cooked meals in your city. Healthy, affordable, and just a click away!</p>
+    </div>
+
+    <!-- Center: Listing CTA -->
+    <div class="footer-listing-cta">
+      <h3>🍱 Want to List Your Tiffin Service?</h3>
+      <p>Grow your business by reaching hungry students and professionals near you. It’s easy, quick, and free to start.</p>
+      <a href="#">List Your Tiffin</a>
+    </div>
+
+    <!-- Right: Footer Links -->
+    <div class="footer-links">
+      <h3>Quick Links</h3>
+      <a href="index.html">Homepage</a>
+      <a href="about_us.html">About Us</a>
+      <a href="contact.html">Contact Customer Care</a>
+      <a href="terms.html">Terms & Conditions</a>
+      <a href="#">Privacy Policy</a>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    © 2025 TiffinWala. All rights reserved.
+  </div>
+</div>
+
+
+
+
+<!--------------------------------------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------------------------------->
+
+</body>
+</html>

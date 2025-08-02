@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tiffin Finder</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <style>
+    body {
+      background-color: #fff8f0;
+    }
+    .mess-card {
+      background-color: #fff3e0;
+      border: none;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    .mess-card img {
+      height: 200px;
+      width: 200px;
+    }
+    #locationModal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+    #locationModal.active {
+      display: flex;
+    }
+    #locationModal .modal-content {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+      max-width: 400px;
+    }
+    .banner-img {
+      width: 100%;
+      height: 270px;
+      object-fit: cover;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    .sticky-searchbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background-color: #212529;
+      padding: 10px 0;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .sticky-searchbar input[type="search"] {
+      font-size: 1.1rem;
+    }
+    .signin-btn {
+      color: #fff;
+      background-color: #ef6c00;
+      border: none;
+      border-radius: 8px;
+      padding: 6px 14px;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: background-color 0.2s;
+    }
+    .signin-btn:hover {
+      background-color: #e65100;
+    }
+    .stats-section {
+      background-color: #ffe0b2;
+      padding: 20px 0;
+      margin-top: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .stats-section h4 {
+      color: #e65100;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    /* Animated Dropdown Item */
+.custom-dropdown-item {
+  transition: all 0.3s ease-in-out;
+  padding-left: 16px;
+}
+
+.custom-dropdown-item:hover {
+  background-color: #ef6c00;
+  color: white;
+  padding-left: 24px;
+}
+
+/* Animate.css CDN */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css');
+
+  </style>
+</head>
+<body>
+
+<!--------------------------------------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------------------------------->
+
+
+<!-- Location Permission Modal -->
+<div id="locationModal">
+  <div class="modal-content">
+    <h5>Enable Location Services</h5>
+    <p>Allow location access to find tiffin services near you.</p>
+    <button class="btn btn-primary" onclick="getUserLocation()">Enable Location</button>
+    <button class="btn btn-secondary mt-2" onclick="closeLocationModal()">No Thanks</button>
+  </div>
+</div>
+
+<!-- Header -->
+
+
+<!-- Google Identity Integration -->
+<script>
+  function handleGoogleSignIn() {
+    google.accounts.id.initialize({
+      client_id: "537791541680-ljot858jb47ram44dfjcthgjlhk8704h.apps.googleusercontent.com",
+      callback: handleCredentialResponse
+    });
+    google.accounts.id.prompt(); // triggers the popup
+  }
+
+  function handleCredentialResponse(response) {
+    // Decode the JWT token for user info (you can use a real JWT parser)
+    console.log("Encoded JWT ID token: " + response.credential);
+    // You can also store user data in localStorage/sessionStorage if needed
+    window.location.href = "profile.html"; // Redirect to profile page
+  }
+</script>
+
+<!--------------------------------------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------------------------------->
+
+
+  <!-- Header -->
+ <!-- Header -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-searchbar">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="index.html">TiffinFinder</a>
+
+    <!-- Search Bar -->
+    <form class="d-flex w-50 mx-auto">
+      <input class="form-control me-2" type="search" placeholder="Search mess by area, food type..." aria-label="Search">
+      <button class="btn btn-outline-warning" type="submit">Search</button>
+    </form>
+
+    <!-- Dropdown Menu -->
+    <div class="dropdown me-3">
+      <button class="btn text-white border-0" type="button" id="menuToggle" data-bs-toggle="dropdown" aria-expanded="false">
+        <i class="fas fa-bars fa-lg"></i>
+      </button>
+      <ul class="dropdown-menu dropdown-menu-end animate__animated animate__fadeIn" aria-labelledby="menuToggle">
+        <li><a class="dropdown-item custom-dropdown-item" href="about_us.html">About Us</a></li>
+        <li><a class="dropdown-item custom-dropdown-item" href="contact.html">Contact Us</a></li>
+        <li><a class="dropdown-item custom-dropdown-item" href="terms.html">Terms & Conditions</a></li>
+        <li><a class="dropdown-item custom-dropdown-item" href="#">Feedback</a></li>
+      </ul>
+    </div>
+
+    <!-- Sign In -->
+    <div class="d-flex">
+      <button class="btn signin-btn" onclick="handleGoogleSignIn()">Sign In</button>
+    </div>
+  </div>
+</nav>
+
+
+<!--------------------------------------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------------------------------->
+
+
+  <!-- Main Tiffin Image Banner -->
+  <div class="container-fluid mt-4 px-0">
+    <img src="Tiffin Homepage.png" class="banner-img" alt="Tiffin Banner">
+  </div>
+
+<!--------------------------------------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------------------------------->
+
+
+  <!-- Stats Section -->
+  <div class="container stats-section text-center">
+    <div class="row">
+      <div class="col-md-4">
+        <h4><i class="fas fa-smile"></i> 1000+ Happy Customers</h4>
+      </div>
+      <div class="col-md-4">
+        <h4><i class="fas fa-check-circle"></i> 500+ Verified Tiffins</h4>
+      </div>
+      <div class="col-md-4">
+        <h4><i class="fas fa-city"></i> Serving 15+ Cities</h4>
+      </div>
+    </div>
+  </div>
+
+<!--------------------------------------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------------------------------->
+
+
+<!-- Location Banner Section -->
+<style>
+  .location-banner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f8f9fa;
+    padding: 40px 5%;
+    font-size: 2rem;
+    font-weight: 500;
+    font-family: 'Segoe UI', sans-serif;
+  }
+
+  .centered-text {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    text-align: center;
+  }
+
+  .static-text {
+    color: #000;
+  }
+
+  .animated-location-wrapper {
+    display: inline-block;
+    width: 200px; /* Adjust as needed for your longest name */
+    text-align: center;
+  }
+
+  .animated-location {
+    color: #c44a7d;
+    font-family: 'Dancing Script', cursive;
+    font-size: 2.7rem;
+    transition: opacity 0.5s ease;
+    white-space: nowrap;
+  }
+</style>
+
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+
+<div class="location-banner">
+  <div class="centered-text">
+    <span class="static-text">We are also available in</span>
+    <span class="animated-location-wrapper">
+      <span class="animated-location" id="rotating-location">Sitabuldi</span>
+    </span>
+  </div>
+</div>
+
+<script>
+  const locations = [
+    "Sitabuldi",
+    "Dharampeth",
+    "Bharat Nagar",
+    "Nandanvan",
+    "Trimurti Nagar",
+    "Mahal",
+    "Manish Nagar"
+  ];
+
+  let currentLocationIndex = 0;
+  const locationElement = document.getElementById("rotating-location");
+
+  setInterval(() => {
+    currentLocationIndex = (currentLocationIndex + 1) % locations.length;
+    locationElement.style.opacity = 0;
+    setTimeout(() => {
+      locationElement.textContent = locations[currentLocationIndex];
+      locationElement.style.opacity = 1;
+    }, 300);
+  }, 3000);
+</script>
+
+<!--------------------------------------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------------------------------->
+
+
+<!-- Call to Action (CTA) Section -->
+<style>
+  .cta-section {
+    background: linear-gradient(135deg, #ffcc80, #ffb74d);
+    padding: 40px 20px;
+    text-align: center;
+    color: #4e342e;
+    font-family: 'Segoe UI', sans-serif;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    margin-top: -10px;
+  }
+
+  .cta-section h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+
+  .cta-section ul {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 25px;
+    font-size: 1.1rem;
+  }
+
+  .cta-section ul li {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .cta-section .btn-cta {
+    background-color: #e65100;
+    color: white;
+    font-weight: 500;
+    padding: 10px 22px;
+    font-size: 1.1rem;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+  }
+
+  .cta-section .btn-cta:hover {
+    background-color: #bf360c;
+  }
+
+  .cta-section i {
+    color: #3e2723;
+  }
+</style>
+
+<div class="cta-section">
+  <h2>Looking for Healthy, Home-Cooked Food Delivered to Your Door?</h2>
+  <ul>
+    <li><i class="fas fa-check-circle"></i> Affordable Monthly & Weekly Plans</li>
+    <li><i class="fas fa-wallet"></i> Get ₹100 Cashback on Your First Payment</li>
+    <li><i class="fas fa-bolt"></i> Fast & Reliable Daily Delivery</li>
+    <li><span>🍽️</span> Custom Meal Plans (Veg / Non-Veg)</li>
+    <li><span>📍</span> City-Wide Coverage</li>
+  </ul>
+  <a href="#!" class="btn-cta">Sign Up Now & Claim Cashback</a>
+</div>
+
+
+<!--------------------------------------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------------------------------->
+
+
+<!-- Enhanced Testimonials Carousel -->
+<style>
+  .testimonials-section {
+    background: linear-gradient(135deg, #e3f2fd, #ffffff);
+    padding: 60px 20px;
+    font-family: 'Segoe UI', sans-serif;
+    text-align: center;
+    color: #0d47a1;
+  }
+
+  .testimonials-section h2 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 40px;
+  }
+
+  .testimonial-box {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+    min-height: 180px;
+  }
+
+  .testimonial {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+    font-size: 1.1rem;
+  }
+
+  .testimonial.active {
+    opacity: 1;
+    position: relative;
+  }
+
+  .testimonial .avatar {
+    width: 60px;
+    height: 60px;
+    background-color: #bbdefb;
+    border-radius: 50%;
+    display: inline-block;
+    margin-bottom: 15px;
+    background-image: url('https://cdn-icons-png.flaticon.com/512/194/194938.png');
+    background-size: cover;
+    background-position: center;
+  }
+
+  .testimonial p {
+    margin: 0;
+    font-size: 1.1rem;
+    color: #333;
+  }
+
+  .testimonial span {
+    display: block;
+    margin-top: 15px;
+    font-style: italic;
+    font-weight: 500;
+    color: #1565c0;
+  }
+
+  @media (max-width: 600px) {
+    .testimonial {
+      font-size: 1rem;
+    }
+  }
+</style>
+
+<div class="testimonials-section">
+  <h2>💬 What Our Customers Say</h2>
+  <div class="testimonial-box">
+    <div class="testimonial active">
+      <div class="avatar"></div>
+      <p>“Delicious food, just like home!”</p>
+      <span>– Rohan</span>
+    </div>
+    <div class="testimonial">
+      <div class="avatar"></div>
+      <p>“Great value for money. Always on time.”</p>
+      <span>– Priya</span>
+    </div>
+    <div class="testimonial">
+      <div class="avatar"></div>
+      <p>“Tiffins are always hot and fresh. Highly recommended!”</p>
+      <span>– Ankit</span>
+    </div>
+    <div class="testimonial">
+      <div class="avatar"></div>
+      <p>“Healthy and tasty meals, my kids love it too.”</p>
+      <span>– Shreya</span>
+    </div>
+  </div>
+</div>
+
+<script>
+  const testimonials = document.querySelectorAll('.testimonial');
+  let current = 0;
+
+  setInterval(() => {
+    testimonials[current].classList.remove('active');
+    current = (current + 1) % testimonials.length;
+    testimonials[current].classList.add('active');
+  }, 5000); // 5 seconds
+</script>
+
+<!--------------------------------------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------------------------------->
+
+<!-- Section 7: Search Availability -->
+<style>
+  .area-check-section {
+    padding: 60px 20px;
+    background: linear-gradient(135deg, #fffde7, #fff);
+    text-align: center;
+    font-family: 'Segoe UI', sans-serif;
+    color: #424242;
+  }
+
+  .area-check-section h2 {
+    font-size: 2.1rem;
+    color: #ff6f00;
+    margin-bottom: 20px;
+    font-weight: 700;
+  }
+
+  .area-check-section p {
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+    color: #616161;
+  }
+
+  .area-search-form {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .area-search-form input[type="text"] {
+    padding: 12px 18px;
+    border-radius: 10px;
+    border: 1px solid #ffcc80;
+    width: 280px;
+    font-size: 1rem;
+    outline: none;
+    transition: 0.3s;
+  }
+
+  .area-search-form input[type="text"]:focus {
+    border-color: #ff9800;
+    box-shadow: 0 0 5px rgba(255, 152, 0, 0.4);
+  }
+
+  .area-search-form button {
+    background: #ff9800;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  .area-search-form button:hover {
+    background: #fb8c00;
+  }
+
+  .availability-result {
+    margin-top: 25px;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #2e7d32;
+    display: none;
+  }
+</style>
+
+<div class="area-check-section">
+  <h2>📍 Search Availability by Area</h2>
+  <p>Enter your area or pincode to check if we deliver near you</p>
+  <div class="area-search-form">
+    <input type="text" id="areaInput" placeholder="Eg. Sitabuldi or 440001" oninput="handleInputChange()">
+    <button onclick="checkAvailability()">Check</button>
+  </div>
+  <div class="availability-result" id="resultBox">✅ Yes! We deliver in your area.</div>
+</div>
+
+<script>
+  const areaInput = document.getElementById('areaInput');
+  const resultBox = document.getElementById('resultBox');
+  const availableAreas = ['sitabuldi', 'dharampeth', '440001', 'bajaj nagar', 'bharat nagar', '440013'];
+
+  function checkAvailability() {
+    const area = areaInput.value.trim().toLowerCase();
+
+    if (area === '') {
+      resultBox.style.color = '#d32f2f';
+      resultBox.innerText = '⚠️ Please enter an area or pincode.';
+    } else if (availableAreas.includes(area)) {
+      resultBox.style.color = '#2e7d32';
+      resultBox.innerText = '✅ Yes! We deliver in your area.';
+    } else {
+      resultBox.style.color = '#d32f2f';
+      resultBox.innerText = '❌ Sorry, we don’t currently serve this location.';
+    }
+
+    resultBox.style.display = 'block';
+  }
+
+  function handleInputChange() {
+    if (areaInput.value.trim() === '') {
+      resultBox.style.display = 'none';
+    }
+  }
+</script>
+
+<!--------------------------------------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------------------------------->
+
+<!-- How It Works Section -->
+
+<style>
+  .how-it-works {
+    background: #fff3e0;
+    padding: 30px 20px;
+    font-family: 'Segoe UI', sans-serif;
+    color: #4e342e;
+    text-align: center;
+  }
+
+  .how-it-works h2 {
+    font-size: 2.2rem;
+    color: #e65100;
+    margin-bottom: 40px;
+    font-weight: 700;
+  }
+
+  .timeline {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .timeline-step {
+    background: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    padding: 30px 20px;
+    width: 230px;
+    text-align: center;
+    transition: transform 0.3s;
+  }
+
+  .timeline-step:hover {
+    transform: translateY(-5px);
+  }
+
+  .timeline-step img {
+    width: 50px;
+    margin-bottom: 20px;
+  }
+
+  .timeline-step h3 {
+    font-size: 1.2rem;
+    color: #bf360c;
+    margin-bottom: 10px;
+  }
+
+  .timeline-step p {
+    font-size: 0.95rem;
+    color: #5d4037;
+  }
+</style>
+
+<div class="how-it-works">
+  <h2>🔄 How It Works</h2>
+  <div class="timeline">
+    <div class="timeline-step">
+      <img src="https://img.icons8.com/fluency/48/000000/worldwide-location.png" alt="Location">
+      <h3>Step 1: Check Availability</h3>
+      <p>Enter your area or pincode to see if we deliver in your location.</p>
+    </div>
+    <div class="timeline-step">
+      <img src="https://img.icons8.com/fluency/48/000000/login-rounded.png" alt="Login">
+      <h3>Step 2: Sign In & Browse</h3>
+      <p>Login and explore a variety of verified mess/tiffin services near you.</p>
+    </div>
+    <div class="timeline-step">
+      <img src="https://img.icons8.com/fluency/48/000000/money-transfer.png" alt="Payment">
+      <h3>Step 3: Pay & Save</h3>
+      <p>Pay securely on our website and get ₹100 cashback on your first order!</p>
+    </div>
+    <div class="timeline-step">
+      <img src="https://img.icons8.com/fluency/48/000000/meal.png" alt="Enjoy Meal">
+      <h3>Step 4: Enjoy Your Meal</h3>
+      <p>Get delicious, hot, home-cooked food delivered to your doorstep daily.</p>
+    </div>
+  </div>
+</div>
+
+<!--------------------------------------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------------------------------->
+
+<!-- Section 9: Enhanced FAQ Accordion with Styled Answers -->
+<style>
+  .faq-section {
+    background: linear-gradient(135deg, #fff8e1, #ffffff);
+    padding: 70px 20px;
+    font-family: 'Segoe UI', sans-serif;
+    color: #333;
+  }
+
+  .faq-section h2 {
+    text-align: center;
+    font-size: 2.4rem;
+    color: #ff6f00;
+    margin-bottom: 40px;
+    font-weight: 800;
+  }
+
+  .accordion {
+    max-width: 900px;
+    margin: auto;
+    border-radius: 12px;
+  }
+
+  .accordion-item {
+    background: #ffffff;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    transition: 0.3s;
+    overflow: hidden;
+  }
+
+  .accordion-item.active {
+    box-shadow: 0 6px 16px rgba(255, 111, 0, 0.2);
+  }
+
+  .accordion-header {
+    background-color: #fff3e0;
+    cursor: pointer;
+    padding: 18px 20px;
+    font-size: 1.15rem;
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: 0.3s;
+    position: relative;
+  }
+
+  .accordion-header:hover {
+    background-color: #ffe0b2;
+  }
+
+  .accordion-header .icon {
+    font-size: 1.4rem;
+    transition: transform 0.3s ease;
+    color: #ff6f00;
+    margin-left: 12px;
+  }
+
+  .accordion-item.active .icon {
+    transform: rotate(45deg);
+  }
+
+  .accordion-body {
+    background-color: #fffdf7;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.4s;
+    padding: 0 20px;
+    font-size: 1rem;
+    color: #555;
+    border-left: 4px solid #ffcc80;
+  }
+
+  .accordion-item.active .accordion-body {
+    padding: 16px 20px 20px;
+    max-height: 400px;
+  }
+
+  .accordion-body p {
+    margin: 0;
+    padding: 12px 14px;
+    background: #fff8e1;
+    border-radius: 6px;
+    font-style: italic;
+    font-weight: 500;
+    line-height: 1.6;
+  }
+
+  .question-icon {
+    margin-right: 10px;
+    color: #fb8c00;
+  }
+</style>
+
+<div class="faq-section">
+  <h2>❓ Frequently Asked Questions</h2>
+  <div class="accordion" id="faqAccordion">
+
+    <div class="accordion-item">
+      <div class="accordion-header">
+        <span><i class="question-icon">🍛</i>Is the food vegetarian, non-vegetarian, or both?</span>
+        <span class="icon">+</span>
+      </div>
+      <div class="accordion-body"><p>We offer both vegetarian and non-vegetarian options depending on your selection.</p></div>
+    </div>
+
+    <div class="accordion-item">
+      <div class="accordion-header">
+        <span><i class="question-icon">🍴</i>Do you provide trial meals before subscribing?</span>
+        <span class="icon">+</span>
+      </div>
+      <div class="accordion-body"><p>Trial meal availability depends on the individual mess provider.</p></div>
+    </div>
+
+    <div class="accordion-item">
+      <div class="accordion-header">
+        <span><i class="question-icon">💰</i>What are your pricing plans?</span>
+        <span class="icon">+</span>
+      </div>
+      <div class="accordion-body"><p>Monthly plans range from ₹3000 to ₹3500, depending on the mess.</p></div>
+    </div>
+
+    <div class="accordion-item">
+      <div class="accordion-header">
+        <span><i class="question-icon">🚚</i>Are there any hidden charges or delivery fees?</span>
+        <span class="icon">+</span>
+      </div>
+      <div class="accordion-body"><p>No, all delivery charges are already included in your plan.</p></div>
+    </div>
+
+    <div class="accordion-item">
+      <div class="accordion-header">
+        <span><i class="question-icon">📅</i>Do you offer daily, weekly, or monthly subscriptions?</span>
+        <span class="icon">+</span>
+      </div>
+      <div class="accordion-body"><p>We currently offer only monthly subscription plans.</p></div>
+    </div>
+
+    <div class="accordion-item">
+      <div class="accordion-header">
+        <span><i class="question-icon">🕒</i>What time will the food be delivered?</span>
+        <span class="icon">+</span>
+      </div>
+      <div class="accordion-body"><p>Delivery timing varies by mess. Please confirm directly with your selected provider.</p></div>
+    </div>
+
+    <div class="accordion-item">
+      <div class="accordion-header">
+        <span><i class="question-icon">📦</i>Is delivery available on weekends or holidays?</span>
+        <span class="icon">+</span>
+      </div>
+      <div class="accordion-body"><p>Some messes deliver on Sundays and holidays; others may not. Details are shown on each listing.</p></div>
+    </div>
+
+    <div class="accordion-item">
+      <div class="accordion-header">
+        <span><i class="question-icon">🏫</i>Can I order mess in my college or office?</span>
+        <span class="icon">+</span>
+      </div>
+      <div class="accordion-body"><p>Yes, but please confirm with your mess provider.</p></div>
+    </div>
+
+    <div class="accordion-item">
+      <div class="accordion-header">
+        <span><i class="question-icon">👨‍🎓</i>Do you provide food for students/working professionals?</span>
+        <span class="icon">+</span>
+      </div>
+      <div class="accordion-body"><p>Absolutely! Our services are tailored for both students and working professionals.</p></div>
+    </div>
+
+    <div class="accordion-item">
+      <div class="accordion-header">
+        <span><i class="question-icon">⭐</i>Can I see ratings and reviews for each mess?</span>
+        <span class="icon">+</span>
+      </div>
+      <div class="accordion-body"><p>Yes, user ratings and reviews are available for each mess on our website.</p></div>
+    </div>
+
+    <div class="accordion-item">
+      <div class="accordion-header">
+        <span><i class="question-icon">🎁</i>Do you offer cashbacks?</span>
+        <span class="icon">+</span>
+      </div>
+      <div class="accordion-body"><p>Yes! Enjoy ₹100 cashback on your first payment when ordering through our website.</p></div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  const accordionItems = document.querySelectorAll('.accordion-item');
+
+  accordionItems.forEach(item => {
+    const header = item.querySelector('.accordion-header');
+
+    header.addEventListener('click', () => {
+      const currentlyActive = document.querySelector('.accordion-item.active');
+      if (currentlyActive && currentlyActive !== item) {
+        currentlyActive.classList.remove('active');
+      }
+      item.classList.toggle('active');
+    });
+  });
+</script>
+
+
+<!--------------------------------------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------------------------------->
+
+
+<!--------------------------------------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------------------------------->
+
+
+  <!-- More Ads -->
+  <div class="container mt-4">
+    <div class="bg-light text-center py-4 rounded border">[ Sponsored Ad Space ]</div>
+  </div>
+
+
+<!--------------------------------------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------------------------------->
+
+
+<!-- Section: Footer -->
+<style>
+  .footer {
+    background: #212121;
+    color: #f5f5f5;
+    padding: 60px 20px 30px;
+    font-family: 'Segoe UI', sans-serif;
+  }
+
+  .footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 190px;
+    max-width: 1200px;
+    margin: auto;
+    text-align: left;
+  }
+
+  .footer-logo {
+    flex: 1;
+    min-width: 240px;
+  }
+
+  .footer-logo h2 {
+    color: #ffab00;
+    margin-bottom: 10px;
+  }
+
+  .footer-logo p {
+    font-size: 0.95rem;
+    color: #bdbdbd;
+  }
+
+  .footer-listing-cta {
+    flex: 1;
+    min-width: 260px;
+    background: #424242;
+    padding: 25px 20px;
+    border-radius: 10px;
+    text-align: center;
+  }
+
+  .footer-listing-cta h3 {
+    color: #ffcc80;
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+  }
+
+  .footer-listing-cta p {
+    font-size: 0.95rem;
+    color: #e0e0e0;
+    margin-bottom: 15px;
+  }
+
+  .footer-listing-cta a {
+    display: inline-block;
+    padding: 10px 18px;
+    background: #ffab00;
+    color: #212121;
+    font-weight: 600;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: 0.3s;
+  }
+
+  .footer-listing-cta a:hover {
+    background: #ff8f00;
+  }
+
+  .footer-links {
+    flex: 1;
+    min-width: 240px;
+  }
+
+  .footer-links h3 {
+    color: #ffab00;
+    margin-bottom: 15px;
+  }
+
+  .footer-links a {
+    display: block;
+    color: #e0e0e0;
+    font-size: 0.95rem;
+    text-decoration: none;
+    margin-bottom: 10px;
+    transition: 0.3s;
+  }
+
+  .footer-links a:hover {
+    color: #ffcc80;
+  }
+
+  .footer-bottom {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 0.85rem;
+    color: #9e9e9e;
+  }
+</style>
+
+<div class="footer">
+  <div class="footer-container">
+
+    <!-- Left: Logo + Text -->
+    <div class="footer-logo">
+      <h2>TiffinWala</h2>
+      <p>Connecting you to the best home-cooked meals in your city. Healthy, affordable, and just a click away!</p>
+    </div>
+
+    <!-- Center: Listing CTA -->
+    <div class="footer-listing-cta">
+      <h3>🍱 Want to List Your Tiffin Service?</h3>
+      <p>Grow your business by reaching hungry students and professionals near you. It’s easy, quick, and free to start.</p>
+      <a href="#">List Your Tiffin</a>
+    </div>
+
+    <!-- Right: Footer Links -->
+    <div class="footer-links">
+      <h3>Quick Links</h3>
+      <a href="index.html">Homepage</a>
+      <a href="about_us.html">About Us</a>
+      <a href="contact.html">Contact Customer Care</a>
+      <a href="terms.html">Terms & Conditions</a>
+      <a href="#">Privacy Policy</a>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    © 2025 TiffinWala. All rights reserved.
+  </div>
+</div>
+
+
+
+
+<!--------------------------------------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------------------------------->
+
+
+  <script>
+    const enableLocationModule = false;
+
+    window.onload = () => {
+      if (enableLocationModule) {
+        setTimeout(() => {
+          document.getElementById('locationModal').classList.add('active');
+        }, 5000);
+      }
+    }
+
+    function getUserLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition((position) => {
+          closeLocationModal();
+        }, () => {
+          closeLocationModal();
+        });
+      } else {
+        closeLocationModal();
+      }
+    }
+
+    function closeLocationModal() {
+      document.getElementById('locationModal').classList.remove('active');
+    }
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
