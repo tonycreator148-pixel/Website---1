@@ -6,126 +6,53 @@
   <title>Tiffin Finder</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://accounts.google.com/gsi/client" async defer></script>
-  <style>
-    body {
-      background-color: #fff8f0;
-    }
-    .mess-card {
-      background-color: #fff3e0;
-      border: none;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    }
-    .mess-card img {
-      height: 200px;
-      width: 200px;
-    }
-    #locationModal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      justify-content: center;
-      align-items: center;
-      z-index: 9999;
-    }
-    #locationModal.active {
-      display: flex;
-    }
-    #locationModal .modal-content {
-      background: white;
-      padding: 20px;
-      border-radius: 8px;
-      text-align: center;
-      max-width: 400px;
-    }
-    .banner-img {
-      width: 100%;
-      height: 270px;
-      object-fit: cover;
-      border-radius: 8px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    }
-    .sticky-searchbar {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      background-color: #212529;
-      padding: 10px 0;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-    .sticky-searchbar input[type="search"] {
-      font-size: 1.1rem;
-    }
-    .signin-btn {
-      color: #fff;
-      background-color: #ef6c00;
-      border: none;
-      border-radius: 8px;
-      padding: 6px 14px;
-      font-weight: 500;
-      font-size: 0.95rem;
-      transition: background-color 0.2s;
-    }
-    .signin-btn:hover {
-      background-color: #e65100;
-    }
-    .stats-section {
-      background-color: #ffe0b2;
-      padding: 20px 0;
-      margin-top: 30px;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
-    .stats-section h4 {
-      color: #e65100;
-      font-weight: bold;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-    }
-
-    /* Animated Dropdown Item */
-.custom-dropdown-item {
-  transition: all 0.3s ease-in-out;
-  padding-left: 16px;
-}
-
-.custom-dropdown-item:hover {
-  background-color: #ef6c00;
-  color: white;
-  padding-left: 24px;
-}
-
-/* Animate.css CDN */
-@import url('https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css');
-
-  </style>
+  
+  <link rel="stylesheet" href="style.css">
+  
 </head>
+
 <body>
 
-<!--------------------------------------------------------------------------------------------------------->
-<!--------------------------------------------------------------------------------------------------------->
+<!-------------------------------------------- Search Bar and Nav Bar ----------------------------------------------->
 
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-searchbar">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="index.html">TiffinFinder</a>
 
-<!-- Location Permission Modal -->
-<div id="locationModal">
-  <div class="modal-content">
-    <h5>Enable Location Services</h5>
-    <p>Allow location access to find tiffin services near you.</p>
-    <button class="btn btn-primary" onclick="getUserLocation()">Enable Location</button>
-    <button class="btn btn-secondary mt-2" onclick="closeLocationModal()">No Thanks</button>
+<!-- Search Bar -->
+
+    <form class="d-flex w-50 mx-auto">
+      <input class="form-control me-2" type="search" placeholder="Search mess by area, food type..." aria-label="Search">
+      <button class="btn btn-outline-warning" type="submit">Search</button>
+    </form>
+
+<!-- Dropdown Menu -->
+    
+      <div class="dropdown me-3">
+      <button class="btn text-white border-0" type="button" id="menuToggle" data-bs-toggle="dropdown" aria-expanded="false">
+        <i class="fas fa-bars fa-lg"></i>
+      </button>
+      <ul class="dropdown-menu dropdown-menu-end animate__animated animate__fadeIn" aria-labelledby="menuToggle">
+        <li><a class="dropdown-item custom-dropdown-item" href="about_us.html">About Us</a></li>
+        <li><a class="dropdown-item custom-dropdown-item" href="contact.html">Contact Us</a></li>
+        <li><a class="dropdown-item custom-dropdown-item" href="terms.html">Terms & Conditions</a></li>
+        <li><a class="dropdown-item custom-dropdown-item" href="#">Feedback</a></li>
+      </ul>
+    </div>
+
+<!-- Google Sign In -->
+    
+      <div class="d-flex">
+      <button class="btn signin-btn" onclick="handleGoogleSignIn()">Sign In</button>
+    </div>
   </div>
-</div>
+</nav>
 
-<!-- Header -->
+<!-- Google Identity Integrations -->
 
-
-<!-- Google Identity Integration -->
 <script>
   function handleGoogleSignIn() {
     google.accounts.id.initialize({
@@ -143,116 +70,36 @@
   }
 </script>
 
-<!--------------------------------------------------------------------------------------------------------->
-<!--------------------------------------------------------------------------------------------------------->
+
+<!-------------------------------------------- Main Tiffin Image Banner ----------------------------------------------->
 
 
-  <!-- Header -->
- <!-- Header -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-searchbar">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="index.html">TiffinFinder</a>
-
-    <!-- Search Bar -->
-    <form class="d-flex w-50 mx-auto">
-      <input class="form-control me-2" type="search" placeholder="Search mess by area, food type..." aria-label="Search">
-      <button class="btn btn-outline-warning" type="submit">Search</button>
-    </form>
-
-    <!-- Dropdown Menu -->
-    <div class="dropdown me-3">
-      <button class="btn text-white border-0" type="button" id="menuToggle" data-bs-toggle="dropdown" aria-expanded="false">
-        <i class="fas fa-bars fa-lg"></i>
-      </button>
-      <ul class="dropdown-menu dropdown-menu-end animate__animated animate__fadeIn" aria-labelledby="menuToggle">
-        <li><a class="dropdown-item custom-dropdown-item" href="about_us.html">About Us</a></li>
-        <li><a class="dropdown-item custom-dropdown-item" href="contact.html">Contact Us</a></li>
-        <li><a class="dropdown-item custom-dropdown-item" href="terms.html">Terms & Conditions</a></li>
-        <li><a class="dropdown-item custom-dropdown-item" href="#">Feedback</a></li>
-      </ul>
-    </div>
-
-    <!-- Sign In -->
-    <div class="d-flex">
-      <button class="btn signin-btn" onclick="handleGoogleSignIn()">Sign In</button>
-    </div>
-  </div>
-</nav>
-
-
-<!--------------------------------------------------------------------------------------------------------->
-<!--------------------------------------------------------------------------------------------------------->
-
-
-  <!-- Main Tiffin Image Banner -->
   <div class="container-fluid mt-4 px-0">
-    <img src="Tiffin Homepage.png" class="banner-img" alt="Tiffin Banner">
+    <img src="Tiffin Homepage.png" class="banner-img img-fluid w-100" alt="Tiffin Banner">
+
   </div>
 
-<!--------------------------------------------------------------------------------------------------------->
-<!--------------------------------------------------------------------------------------------------------->
+
+<!-------------------------------------------- Stats Section ----------------------------------------------->
 
 
-  <!-- Stats Section -->
   <div class="container stats-section text-center">
     <div class="row">
-      <div class="col-md-4">
+      <div class="col-12 col-md-4">
         <h4><i class="fas fa-smile"></i> 1000+ Happy Customers</h4>
       </div>
-      <div class="col-md-4">
+      <div class="col-12 col-md-4">
         <h4><i class="fas fa-check-circle"></i> 500+ Verified Tiffins</h4>
       </div>
-      <div class="col-md-4">
+      <div class="col-12 col-md-4">
         <h4><i class="fas fa-city"></i> Serving 15+ Cities</h4>
       </div>
     </div>
   </div>
 
-<!--------------------------------------------------------------------------------------------------------->
-<!--------------------------------------------------------------------------------------------------------->
 
+<!-------------------------------------------- Also Available Section ----------------------------------------------->
 
-<!-- Location Banner Section -->
-<style>
-  .location-banner {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #f8f9fa;
-    padding: 40px 5%;
-    font-size: 2rem;
-    font-weight: 500;
-    font-family: 'Segoe UI', sans-serif;
-  }
-
-  .centered-text {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 12px;
-    text-align: center;
-  }
-
-  .static-text {
-    color: #000;
-  }
-
-  .animated-location-wrapper {
-    display: inline-block;
-    width: 200px; /* Adjust as needed for your longest name */
-    text-align: center;
-  }
-
-  .animated-location {
-    color: #c44a7d;
-    font-family: 'Dancing Script', cursive;
-    font-size: 2.7rem;
-    transition: opacity 0.5s ease;
-    white-space: nowrap;
-  }
-</style>
-
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
 
 <div class="location-banner">
   <div class="centered-text">
@@ -287,62 +134,109 @@
   }, 3000);
 </script>
 
-<!--------------------------------------------------------------------------------------------------------->
-<!--------------------------------------------------------------------------------------------------------->
+
+<!-------------------------------------------- Location Permission Modal & Settings ----------------------------------------------->
 
 
-<!-- Call to Action (CTA) Section -->
-<style>
-  .cta-section {
-    background: linear-gradient(135deg, #ffcc80, #ffb74d);
-    padding: 40px 20px;
-    text-align: center;
-    color: #4e342e;
-    font-family: 'Segoe UI', sans-serif;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-    margin-top: -10px;
-  }
+<div id="locationModal">
+  <div class="modal-content">
+    <h5>Enable Location Services</h5>
+    <p>Allow location access to find tiffin services near you.</p>
+    <button class="btn btn-primary" onclick="getUserLocation()">Enable Location</button>
+    <button class="btn btn-secondary mt-2" onclick="closeLocationModal()">No Thanks</button>
+  </div>
+</div>
 
-  .cta-section h2 {
-    font-size: 2rem;
-    font-weight: 600;
-    margin-bottom: 20px;
-  }
+<script>
+    const enableLocationModule = false;
 
-  .cta-section ul {
-    list-style: none;
-    padding-left: 0;
-    margin-bottom: 25px;
-    font-size: 1.1rem;
-  }
+    window.onload = () => {
+      if (enableLocationModule) {
+        setTimeout(() => {
+          document.getElementById('locationModal').classList.add('active');
+        }, 5000);
+      }
+    }
 
-  .cta-section ul li {
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-  }
+    function getUserLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition((position) => {
+          closeLocationModal();
+        }, () => {
+          closeLocationModal();
+        });
+      } else {
+        closeLocationModal();
+      }
+    }
 
-  .cta-section .btn-cta {
-    background-color: #e65100;
-    color: white;
-    font-weight: 500;
-    padding: 10px 22px;
-    font-size: 1.1rem;
-    border-radius: 8px;
-    text-decoration: none;
-    transition: background-color 0.3s ease;
-  }
+    function closeLocationModal() {
+      document.getElementById('locationModal').classList.remove('active');
+    }
+  </script>
 
-  .cta-section .btn-cta:hover {
-    background-color: #bf360c;
-  }
 
-  .cta-section i {
-    color: #3e2723;
-  }
-</style>
+<!-------------------------------------------- Featured Mess Section ----------------------------------------------->
+
+
+<!--
+
+<div class="container">
+  <h3 class="my-4">Top Tiffin Services Near You</h3>
+  <div class="row gx-3 gy-4">
+
+    <div class="card mess-card mb-3 mx-2" style="width: 18rem;">
+      <img src="sample.png" class="card-img-top" alt="Tiffin Image">
+      <div class="card-body">
+        <h5 class="card-title">Maa's Tiffin</h5>
+        <p class="mb-1 text-success"><i class="fas fa-circle" style="font-size: 8px; color: green;"></i> <b>VEG</b></p>
+        <p class="card-text"><b>Ratings:</b> ⭐️⭐️⭐️⭐️⭐️</p>
+        <p class="card-text"><b>Price:</b> ₹3000/month</p>
+        <a href="#" class="btn btn-warning">View Details</a>
+      </div>
+    </div>
+
+    <div class="card mess-card mb-3 mx-2" style="width: 18rem;">
+      <img src="sample.png" class="card-img-top" alt="Tiffin Image">
+      <div class="card-body">
+        <h5 class="card-title">Swadisht Kitchen</h5>
+        <p class="mb-1 text-danger"><i class="fas fa-circle" style="font-size: 8px; color: red;"></i> <b>NON-VEG</b></p>
+        <p class="card-text"><b>Ratings:</b>⭐️⭐️⭐️⭐️</p>
+        <p class="card-text"><b>Price:</b> ₹3500/month</p>
+        <a href="#" class="btn btn-warning">View Details</a>
+      </div>
+    </div>
+
+    <div class="card mess-card mb-3 mx-2" style="width: 18rem;">
+      <img src="sample.png" class="card-img-top" alt="Tiffin Image">
+      <div class="card-body">
+        <h5 class="card-title">HomeStyle Meals</h5>
+        <p class="mb-1 text-success"><i class="fas fa-circle" style="font-size: 8px; color: green;"></i> <b>VEG</b></p>
+        <p class="card-text"><b>Ratings:</b> ⭐️⭐️</p>
+        <p class="card-text"><b>Price:</b> ₹3200/month</p>
+        <a href="#" class="btn btn-warning">View Details</a>
+      </div>
+    </div>
+
+    <div class="card mess-card mb-3 mx-2" style="width: 18rem;">
+      <img src="sample.png" class="card-img-top" alt="Tiffin Image">
+      <div class="card-body">
+        <h5 class="card-title">TiffinXpress</h5>
+        <p class="mb-1 text-danger"><i class="fas fa-circle" style="font-size: 8px; color: red;"></i> <b>NON-VEG</b></p>
+        <p class="card-text"><b>Ratings:</b> ⭐️⭐️⭐️</p>
+        <p class="card-text"><b>Price:</b> ₹3300/month</p>
+        <a href="#" class="btn btn-warning">View Details</a>
+      </div>
+    </div>
+
+
+  </div>
+</div>
+
+-->
+
+<!-------------------------------------------- CTA Section ----------------------------------------------->
+
 
 <div class="cta-section">
   <h2>Looking for Healthy, Home-Cooked Food Delivered to Your Door?</h2>
@@ -357,86 +251,8 @@
 </div>
 
 
-<!--------------------------------------------------------------------------------------------------------->
-<!--------------------------------------------------------------------------------------------------------->
+<!-------------------------------------------- Testimonials Section ----------------------------------------------->
 
-
-<!-- Enhanced Testimonials Carousel -->
-<style>
-  .testimonials-section {
-    background: linear-gradient(135deg, #e3f2fd, #ffffff);
-    padding: 60px 20px;
-    font-family: 'Segoe UI', sans-serif;
-    text-align: center;
-    color: #0d47a1;
-  }
-
-  .testimonials-section h2 {
-    font-size: 2.2rem;
-    font-weight: 700;
-    margin-bottom: 40px;
-  }
-
-  .testimonial-box {
-    position: relative;
-    max-width: 800px;
-    margin: 0 auto;
-    min-height: 180px;
-  }
-
-  .testimonial {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    opacity: 0;
-    transition: opacity 0.8s ease-in-out;
-    width: 100%;
-    padding: 20px;
-    box-sizing: border-box;
-    background: white;
-    border-radius: 16px;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
-    font-size: 1.1rem;
-  }
-
-  .testimonial.active {
-    opacity: 1;
-    position: relative;
-  }
-
-  .testimonial .avatar {
-    width: 60px;
-    height: 60px;
-    background-color: #bbdefb;
-    border-radius: 50%;
-    display: inline-block;
-    margin-bottom: 15px;
-    background-image: url('https://cdn-icons-png.flaticon.com/512/194/194938.png');
-    background-size: cover;
-    background-position: center;
-  }
-
-  .testimonial p {
-    margin: 0;
-    font-size: 1.1rem;
-    color: #333;
-  }
-
-  .testimonial span {
-    display: block;
-    margin-top: 15px;
-    font-style: italic;
-    font-weight: 500;
-    color: #1565c0;
-  }
-
-  @media (max-width: 600px) {
-    .testimonial {
-      font-size: 1rem;
-    }
-  }
-</style>
 
 <div class="testimonials-section">
   <h2>💬 What Our Customers Say</h2>
@@ -475,77 +291,9 @@
   }, 5000); // 5 seconds
 </script>
 
-<!--------------------------------------------------------------------------------------------------------->
-<!--------------------------------------------------------------------------------------------------------->
 
-<!-- Section 7: Search Availability -->
-<style>
-  .area-check-section {
-    padding: 60px 20px;
-    background: linear-gradient(135deg, #fffde7, #fff);
-    text-align: center;
-    font-family: 'Segoe UI', sans-serif;
-    color: #424242;
-  }
+<!-------------------------------------------- Area Availability Checking Section ----------------------------------------------->
 
-  .area-check-section h2 {
-    font-size: 2.1rem;
-    color: #ff6f00;
-    margin-bottom: 20px;
-    font-weight: 700;
-  }
-
-  .area-check-section p {
-    font-size: 1.1rem;
-    margin-bottom: 30px;
-    color: #616161;
-  }
-
-  .area-search-form {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 12px;
-  }
-
-  .area-search-form input[type="text"] {
-    padding: 12px 18px;
-    border-radius: 10px;
-    border: 1px solid #ffcc80;
-    width: 280px;
-    font-size: 1rem;
-    outline: none;
-    transition: 0.3s;
-  }
-
-  .area-search-form input[type="text"]:focus {
-    border-color: #ff9800;
-    box-shadow: 0 0 5px rgba(255, 152, 0, 0.4);
-  }
-
-  .area-search-form button {
-    background: #ff9800;
-    color: white;
-    border: none;
-    padding: 12px 20px;
-    border-radius: 10px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: 0.3s;
-  }
-
-  .area-search-form button:hover {
-    background: #fb8c00;
-  }
-
-  .availability-result {
-    margin-top: 25px;
-    font-size: 1rem;
-    font-weight: 500;
-    color: #2e7d32;
-    display: none;
-  }
-</style>
 
 <div class="area-check-section">
   <h2>📍 Search Availability by Area</h2>
@@ -586,66 +334,9 @@
   }
 </script>
 
-<!--------------------------------------------------------------------------------------------------------->
-<!--------------------------------------------------------------------------------------------------------->
 
-<!-- How It Works Section -->
+<!-------------------------------------------- How It Works - Section ----------------------------------------------->
 
-<style>
-  .how-it-works {
-    background: #fff3e0;
-    padding: 30px 20px;
-    font-family: 'Segoe UI', sans-serif;
-    color: #4e342e;
-    text-align: center;
-  }
-
-  .how-it-works h2 {
-    font-size: 2.2rem;
-    color: #e65100;
-    margin-bottom: 40px;
-    font-weight: 700;
-  }
-
-  .timeline {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
-    max-width: 1000px;
-    margin: 0 auto;
-  }
-
-  .timeline-step {
-    background: #ffffff;
-    border-radius: 15px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    padding: 30px 20px;
-    width: 230px;
-    text-align: center;
-    transition: transform 0.3s;
-  }
-
-  .timeline-step:hover {
-    transform: translateY(-5px);
-  }
-
-  .timeline-step img {
-    width: 50px;
-    margin-bottom: 20px;
-  }
-
-  .timeline-step h3 {
-    font-size: 1.2rem;
-    color: #bf360c;
-    margin-bottom: 10px;
-  }
-
-  .timeline-step p {
-    font-size: 0.95rem;
-    color: #5d4037;
-  }
-</style>
 
 <div class="how-it-works">
   <h2>🔄 How It Works</h2>
@@ -673,104 +364,10 @@
   </div>
 </div>
 
-<!--------------------------------------------------------------------------------------------------------->
-<!--------------------------------------------------------------------------------------------------------->
 
-<!-- Section 9: Enhanced FAQ Accordion with Styled Answers -->
-<style>
-  .faq-section {
-    background: linear-gradient(135deg, #fff8e1, #ffffff);
-    padding: 70px 20px;
-    font-family: 'Segoe UI', sans-serif;
-    color: #333;
-  }
 
-  .faq-section h2 {
-    text-align: center;
-    font-size: 2.4rem;
-    color: #ff6f00;
-    margin-bottom: 40px;
-    font-weight: 800;
-  }
+<!-------------------------------------------- FAQs Section ----------------------------------------------->
 
-  .accordion {
-    max-width: 900px;
-    margin: auto;
-    border-radius: 12px;
-  }
-
-  .accordion-item {
-    background: #ffffff;
-    border-radius: 10px;
-    margin-bottom: 15px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-    transition: 0.3s;
-    overflow: hidden;
-  }
-
-  .accordion-item.active {
-    box-shadow: 0 6px 16px rgba(255, 111, 0, 0.2);
-  }
-
-  .accordion-header {
-    background-color: #fff3e0;
-    cursor: pointer;
-    padding: 18px 20px;
-    font-size: 1.15rem;
-    font-weight: 600;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    transition: 0.3s;
-    position: relative;
-  }
-
-  .accordion-header:hover {
-    background-color: #ffe0b2;
-  }
-
-  .accordion-header .icon {
-    font-size: 1.4rem;
-    transition: transform 0.3s ease;
-    color: #ff6f00;
-    margin-left: 12px;
-  }
-
-  .accordion-item.active .icon {
-    transform: rotate(45deg);
-  }
-
-  .accordion-body {
-    background-color: #fffdf7;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.4s ease, padding 0.4s;
-    padding: 0 20px;
-    font-size: 1rem;
-    color: #555;
-    border-left: 4px solid #ffcc80;
-  }
-
-  .accordion-item.active .accordion-body {
-    padding: 16px 20px 20px;
-    max-height: 400px;
-  }
-
-  .accordion-body p {
-    margin: 0;
-    padding: 12px 14px;
-    background: #fff8e1;
-    border-radius: 6px;
-    font-style: italic;
-    font-weight: 500;
-    line-height: 1.6;
-  }
-
-  .question-icon {
-    margin-right: 10px;
-    color: #fb8c00;
-  }
-</style>
 
 <div class="faq-section">
   <h2>❓ Frequently Asked Questions</h2>
@@ -883,126 +480,15 @@
   });
 </script>
 
-
-<!--------------------------------------------------------------------------------------------------------->
-<!--------------------------------------------------------------------------------------------------------->
+<!-------------------------------------------- Google Ads Section (Optional) ----------------------------------------------->
 
 
-<!--------------------------------------------------------------------------------------------------------->
-<!--------------------------------------------------------------------------------------------------------->
-
-
-  <!-- More Ads -->
   <div class="container mt-4">
     <div class="bg-light text-center py-4 rounded border">[ Sponsored Ad Space ]</div>
   </div>
 
 
-<!--------------------------------------------------------------------------------------------------------->
-<!--------------------------------------------------------------------------------------------------------->
-
-
-<!-- Section: Footer -->
-<style>
-  .footer {
-    background: #212121;
-    color: #f5f5f5;
-    padding: 60px 20px 30px;
-    font-family: 'Segoe UI', sans-serif;
-  }
-
-  .footer-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 190px;
-    max-width: 1200px;
-    margin: auto;
-    text-align: left;
-  }
-
-  .footer-logo {
-    flex: 1;
-    min-width: 240px;
-  }
-
-  .footer-logo h2 {
-    color: #ffab00;
-    margin-bottom: 10px;
-  }
-
-  .footer-logo p {
-    font-size: 0.95rem;
-    color: #bdbdbd;
-  }
-
-  .footer-listing-cta {
-    flex: 1;
-    min-width: 260px;
-    background: #424242;
-    padding: 25px 20px;
-    border-radius: 10px;
-    text-align: center;
-  }
-
-  .footer-listing-cta h3 {
-    color: #ffcc80;
-    font-size: 1.3rem;
-    margin-bottom: 15px;
-  }
-
-  .footer-listing-cta p {
-    font-size: 0.95rem;
-    color: #e0e0e0;
-    margin-bottom: 15px;
-  }
-
-  .footer-listing-cta a {
-    display: inline-block;
-    padding: 10px 18px;
-    background: #ffab00;
-    color: #212121;
-    font-weight: 600;
-    border-radius: 8px;
-    text-decoration: none;
-    transition: 0.3s;
-  }
-
-  .footer-listing-cta a:hover {
-    background: #ff8f00;
-  }
-
-  .footer-links {
-    flex: 1;
-    min-width: 240px;
-  }
-
-  .footer-links h3 {
-    color: #ffab00;
-    margin-bottom: 15px;
-  }
-
-  .footer-links a {
-    display: block;
-    color: #e0e0e0;
-    font-size: 0.95rem;
-    text-decoration: none;
-    margin-bottom: 10px;
-    transition: 0.3s;
-  }
-
-  .footer-links a:hover {
-    color: #ffcc80;
-  }
-
-  .footer-bottom {
-    text-align: center;
-    margin-top: 40px;
-    font-size: 0.85rem;
-    color: #9e9e9e;
-  }
-</style>
-
+<!-------------------------------------------- Footer Settings ----------------------------------------------->
 <div class="footer">
   <div class="footer-container">
 
@@ -1031,46 +517,12 @@
 
   </div>
 
+  <!-- Copyrights Section -->  
   <div class="footer-bottom">
     © 2025 TiffinWala. All rights reserved.
   </div>
 </div>
 
-
-
-
-<!--------------------------------------------------------------------------------------------------------->
-<!--------------------------------------------------------------------------------------------------------->
-
-
-  <script>
-    const enableLocationModule = false;
-
-    window.onload = () => {
-      if (enableLocationModule) {
-        setTimeout(() => {
-          document.getElementById('locationModal').classList.add('active');
-        }, 5000);
-      }
-    }
-
-    function getUserLocation() {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition((position) => {
-          closeLocationModal();
-        }, () => {
-          closeLocationModal();
-        });
-      } else {
-        closeLocationModal();
-      }
-    }
-
-    function closeLocationModal() {
-      document.getElementById('locationModal').classList.remove('active');
-    }
-  </script>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+ 
 </body>
 </html>
