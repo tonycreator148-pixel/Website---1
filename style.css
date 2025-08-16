@@ -153,35 +153,43 @@ body {
 
 
 /* 📱 Mobile Optimization */
+/* Mobile optimization for CTA */
 @media (max-width: 600px) {
   .cta-section {
-    padding: 20px 12px;    /* reduce padding */
-    margin-top: 0;         /* remove negative margin */
+    padding: 20px 12px;   /* shrink padding */
   }
 
   .cta-section h2 {
-    font-size: 1.5rem;     /* smaller heading */
+    font-size: 1.4rem;    /* smaller heading */
     margin-bottom: 12px;
+    line-height: 1.3;     /* tighter spacing */
   }
 
   .cta-section ul {
-    font-size: 0.95rem;    /* smaller text */
+    font-size: 0.95rem;   /* smaller list text */
     margin-bottom: 16px;
   }
 
   .cta-section ul li {
-    margin-bottom: 6px;    /* tighter spacing */
-    gap: 6px;              /* less gap between icon & text */
+    margin-bottom: 8px;
+    gap: 6px;             /* reduce space between icon & text */
+    justify-content: flex-start; /* keep icons aligned with text */
+  }
+
+  .cta-section i {
+    min-width: 18px;      /* ensures icons don't shift */
+    font-size: 1rem;      /* slightly smaller icons */
+    text-align: center;
   }
 
   .cta-section .btn-cta {
-    padding: 8px 16px;     /* more compact button */
     font-size: 1rem;
-    width: 100%;           /* full width button for mobile */
-    max-width: 260px;      /* but not oversized */
-    display: inline-block;
+    padding: 10px 18px;
+    width: 100%;          /* full width button */
+    max-width: 240px;
   }
 }
+
 
 
   /*----------- Enhanced Testimonials Carousel -----------*/
@@ -666,6 +674,7 @@ body {
       text-align: center;
       max-width: 400px;
     }
+
 
 
 
