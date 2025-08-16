@@ -293,6 +293,15 @@ body {
     display: none;
   }
 
+  @media (max-width: 600px) {
+    .area-check-section {
+     margin-top: 12px;
+    margin-bottom: 12px;
+    margin-left: 12px;
+    margin-right: 12px;
+    }
+  }
+
 /*----------- How it Works - Section -----------*/  
 
   .how-it-works {
@@ -624,3 +633,4 @@ body {
       text-align: center;
       max-width: 400px;
     }
+
