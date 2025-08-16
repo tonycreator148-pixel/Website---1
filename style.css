@@ -195,78 +195,94 @@ body {
   /*----------- Enhanced Testimonials Carousel -----------*/
 
   .testimonials-section {
-    background: linear-gradient(135deg, #e3f2fd, #ffffff);
-    padding: 60px 20px;
-    font-family: 'Segoe UI', sans-serif;
-    text-align: center;
-    color: #0d47a1;
-  }
+  background: linear-gradient(135deg, #e3f2fd, #ffffff);
+  padding: 60px 20px;
+  text-align: center;
+  font-family: 'Segoe UI', sans-serif;
+  color: #0d47a1;
+}
 
+.testimonials-section h2 {
+  font-size: 2rem;
+  margin-bottom: 32px;
+}
+
+/* Container */
+.slideshow-container {
+  width: 100%;              /* Full width */
+  overflow: hidden;
+  border-radius: 0;          /* Remove corner rounding so it blends edge-to-edge */
+  background: transparent;   /* Background handled by section */
+  box-shadow: none;
+}
+
+/* Slides wrapper */
+.slides {
+  display: flex;
+  width: max-content;
+  animation: scroll 30s linear infinite;  /* slower for desktop */
+}
+
+/* Individual testimonial card */
+.testimonial {
+  min-width: 320px;   /* Bigger cards for desktop */
+  max-width: 320px;
+  padding: 20px;
+  margin: 16px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.testimonial .avatar {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 12px;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+}
+
+.testimonial p {
+  margin: 0;
+  font-size: 1rem;
+  color: #333;
+  line-height: 1.4;
+}
+
+.testimonial span {
+  display: block;
+  margin-top: 12px;
+  font-style: italic;
+  font-weight: 500;
+  color: #1565c0;
+}
+
+/* Animation */
+@keyframes scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Mobile tweaks */
+@media (max-width: 600px) {
+  .testimonials-section {
+    padding: 40px 12px;
+  }
   .testimonials-section h2 {
-    font-size: 2.2rem;
-    font-weight: 700;
-    margin-bottom: 40px;
+    font-size: 1.4rem;
   }
-
-  .testimonial-box {
-    position: relative;
-    max-width: 800px;
-    margin: 0 auto;
-    min-height: 180px;
-  }
-
   .testimonial {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    opacity: 0;
-    transition: opacity 0.8s ease-in-out;
-    width: 100%;
-    padding: 20px;
-    box-sizing: border-box;
-    background: white;
-    border-radius: 16px;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
-    font-size: 1.1rem;
+    min-width: 220px;
+    max-width: 220px;
+    padding: 14px;
+    font-size: 0.9rem;
   }
+}
 
-  .testimonial.active {
-    opacity: 1;
-    position: relative;
-  }
 
-  .testimonial .avatar {
-    width: 60px;
-    height: 60px;
-    background-color: #bbdefb;
-    border-radius: 50%;
-    display: inline-block;
-    margin-bottom: 15px;
-    background-image: url('https://cdn-icons-png.flaticon.com/512/194/194938.png');
-    background-size: cover;
-    background-position: center;
-  }
-
-  .testimonial p {
-    margin: 0;
-    font-size: 1.1rem;
-    color: #333;
-  }
-
-  .testimonial span {
-    display: block;
-    margin-top: 15px;
-    font-style: italic;
-    font-weight: 500;
-    color: #1565c0;
-  }
-
-  @media (max-width: 600px) {
-    .testimonial {
-      font-size: 1rem;
-    }
-  }
 
 /*----------- Search Availability -----------*/
 
@@ -674,6 +690,7 @@ body {
       text-align: center;
       max-width: 400px;
     }
+
 
 
 
