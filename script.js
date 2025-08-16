@@ -93,6 +93,39 @@
     }
   }
 
+// How It Works 
+
+    const steps = document.querySelectorAll('.step-card');
+    let currentStep = 0;
+
+    function showStep(index) {
+        steps.forEach(step => step.classList.remove('active'));
+        steps[index].classList.add('active');
+    }
+
+    // Auto-slide functionality
+    let autoSlideInterval = setInterval(() => {
+        currentStep = (currentStep + 1) % steps.length;
+        showStep(currentStep);
+    }, 5000);
+
+    // Manual navigation
+    document.querySelector('.left-arrow').addEventListener('click', () => {
+        clearInterval(autoSlideInterval);
+        currentStep = (currentStep - 1 + steps.length) % steps.length;
+        showStep(currentStep);
+    });
+
+    document.querySelector('.right-arrow').addEventListener('click', () => {
+        clearInterval(autoSlideInterval);
+        currentStep = (currentStep + 1) % steps.length;
+        showStep(currentStep);
+    });
+
+
+
+
+
 // FAQ Section
 
   const accordionItems = document.querySelectorAll('.accordion-item');
@@ -137,3 +170,4 @@
     function closeLocationModal() {
       document.getElementById('locationModal').classList.remove('active');
     }
+
