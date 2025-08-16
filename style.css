@@ -382,84 +382,187 @@ body {
 
 /*----------- How it Works - Section -----------*/  
 
-  .how-it-works {
-    background: #fff3e0;
-    padding: 30px 20px;
-    font-family: 'Segoe UI', sans-serif;
-    color: #4e342e;
-    text-align: center;
-  }
+          /* General body styling */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f4f8;
+            min-height: 100vh;
+        }
 
-  .how-it-works h2 {
-    font-size: 2.2rem;
-    color: #e65100;
-    margin-bottom: 40px;
-    font-weight: 700;
-  }
+        /* Main section container */
+        .how-it-works-section {
+            background-color: #e3fde4;
+            color: #0d47a1;
+            padding: 50px 20px;
+            text-align: center;
+        }
 
-  .timeline {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
-    max-width: 1000px;
-    margin: 0 auto;
-  }
+        /* Section heading */
+        .how-it-works-section h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
 
-  .timeline-step {
-    background: #ffffff;
-    border-radius: 15px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    padding: 30px 20px;
-    width: 230px;
-    text-align: center;
-    transition: transform 0.3s;
-  }
+        /* Container for the steps */
+        .steps-container {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            min-height: 300px; /* Increased min-height to prevent "2 of 4" from being trimmed */
+            overflow: hidden;
+        }
 
-  .timeline-step:hover {
-    transform: translateY(-5px);
-  }
+        /* Individual step card */
+        .step-card {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.6s ease-in-out;
+            width: 100%;
+            padding: 30px;
+            padding-left: 40px;
+            padding-right: 40px;
+            box-sizing: border-box;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+        }
 
-  .timeline-step img {
-    width: 50px;
-    margin-bottom: 20px;
-  }
+        /* Active step for display */
+        .step-card.active {
+            opacity: 1;
+        }
 
-  .timeline-step h3 {
-    font-size: 1.2rem;
-    color: #bf360c;
-    margin-bottom: 10px;
-  }
+        /* Avatar styling */
+        .step-card .avatar {
+            width: 60px;
+            height: 60px;
+            background-color: #bbdefb;
+            border-radius: 50%;
+            display: inline-block;
+            margin-bottom: 15px;
+            background-image: url('https://cdn-icons-png.flaticon.com/512/194/194938.png');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        /* Step title */
+        .step-card h3 {
+            font-size: 1.25rem;
+            margin: 0;
+            margin-bottom: 15px;
+            color: #000000be;
+        }
+        
+        /* Step description */
+        .step-card p {
+            margin: 0;
+            margin-top: 10px;
+            font-size: 1.1rem;
+            color: #333;
+            line-height: 1.5;
+        }
+        
+        /* Page numbering */
+        .step-card .page-number {
+            display: block;
+            margin-top: 15px;
+            font-style: italic;
+            font-weight: 500;
+            color: #1565c0;
+            font-size: 0.9rem;
+        }
 
-  .timeline-step p {
-    font-size: 0.95rem;
-    color: #5d4037;
-  }
+        /* Navigation arrows */
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2rem;
+            color: #0d47a1;
+            cursor: pointer;
+            user-select: none;
+            padding: 8px 12px;
+            background:none;
+            border-radius: 50%;
+            transition: background 0.3s, color 0.3s;
+            z-index: 10;
+        }
 
-  /* Timeline responsive layout */
-.timeline {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-}
+        .arrow:hover {
+            background: none;
+            color: none;
+        }
 
-.timeline-step {
-  flex: 1 1 220px; /* flexible width */
-  max-width: 260px;
-  text-align: center;
-}
+        .left-arrow {
+            left: 10px;
+            margin-top: 20;
+        }
 
-/* Mobile view: stack steps */
-@media (max-width: 768px) {
-  .timeline {
-    flex-direction: column;
-    align-items: center;
-  }
-  .timeline-step {
-    max-width: 90%;
-  }
-}
+        .right-arrow {
+            right: 10px;
+            margin-top: 20px;
+        }
+
+        /* Media queries for mobile screens */
+        @media (max-width: 768px) {
+            .how-it-works-section {
+                padding: 9px 15px; /* Reduced top padding for mobile */
+            }
+
+            .how-it-works-section h2 {
+                font-size: 2rem;
+            }
+
+            .steps-container {
+                max-width: 95%;
+                min-height: 250px; /* Adjusting height for mobile */
+            }
+
+            .step-card {
+                padding: 15px;
+                padding-left: 30px;
+                padding-right: 30px;
+            }
+
+            .step-card .avatar {
+                width: 50px;
+                height: 50px;
+            }
+            
+            .step-card h3 {
+                font-size: 1.1rem;
+                margin-bottom: 20px;
+            }
+
+            .step-card p {
+                margin-top: 8px;
+                font-size: 1rem;
+            }
+            
+            .step-card .page-number {
+                font-size: 0.8rem;
+            }
+
+            .arrow {
+                font-size: 1.7rem;
+            }
+            
+            .left-arrow {
+                left: 5px;
+                margin-top: 4px;
+            }
+
+            .right-arrow {
+                right: 5px;
+                margin-top: 4px;
+            }
+        }
 
 /*----------- FAQs Section -----------*/
 
@@ -711,6 +814,7 @@ body {
       text-align: center;
       max-width: 400px;
     }
+
 
 
 
