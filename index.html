@@ -98,52 +98,53 @@
   right: -10px;
 }
 
-@media (max-width: 480px) {
+/* Fluid responsive styles for mobile and small tablets */
+@media (max-width: 768px) {
   .testimonials-section {
-    padding: 40px 15px; /* more breathing space */
+    padding: clamp(30px, 5vw, 50px) clamp(10px, 5vw, 30px);
   }
 
   .testimonials-section h2 {
-    font-size: 1.9rem; /* slightly bigger */
-    margin-bottom: 30px;
+    font-size: clamp(1.6rem, 5vw, 2rem);
+    margin-bottom: clamp(20px, 4vw, 30px);
   }
 
   .testimonial-box {
     max-width: 100%;
-    min-height: 240px; /* taller to fit content */
+    min-height: clamp(220px, 25vw, 260px);
   }
 
   .testimonial {
-    padding: 20px; /* more padding */
-    font-size: 1rem; /* easier to read */
-  }
-
-  .testimonial .avatar {
-    width: 55px; /* bigger avatar */
-    height: 55px;
-    margin-bottom: 12px;
+    padding: clamp(15px, 3vw, 25px);
+    font-size: clamp(0.95rem, 3vw, 1.1rem);
   }
 
   .testimonial h3 {
-    font-size: 1.1rem; /* slightly bigger step title */
-    margin-bottom: 8px;
+    font-size: clamp(1rem, 3vw, 1.2rem);
+    margin-bottom: clamp(6px, 2vw, 10px);
+  }
+
+  .testimonial .avatar {
+    width: clamp(45px, 8vw, 60px);
+    height: clamp(45px, 8vw, 60px);
+    margin-bottom: clamp(10px, 2vw, 14px);
   }
 
   .testimonial span {
-    margin-top: 12px;
+    margin-top: clamp(10px, 2vw, 14px);
   }
 
   .arrow {
-    font-size: 1.6rem;
-    padding: 6px 10px;
+    font-size: clamp(1.5rem, 4vw, 1.8rem);
+    padding: clamp(4px, 1vw, 8px) clamp(6px, 1vw, 12px);
   }
 
   .left-arrow {
-    left: 5px;
+    left: clamp(5px, 2vw, 10px);
   }
 
   .right-arrow {
-    right: 5px;
+    right: clamp(5px, 2vw, 10px);
   }
 }
 
@@ -152,7 +153,7 @@
 <body>
 
 <div class="testimonials-section">
-  <h2>💬 How it Works</h2>
+  <h2>💬 1How it Works</h2>
   <div class="testimonial-box">
     <div class="testimonial active">
       <div class="avatar"></div>
@@ -213,4 +214,5 @@ document.querySelector('.right-arrow').addEventListener('click', () => {
 
 </body>
 </html>
+
 
