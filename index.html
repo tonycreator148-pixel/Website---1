@@ -7,33 +7,33 @@
     <style>
         /* General body styling */
         body {
-            font-family: 'Segoe UI', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f0f4f8; /* Light background color */
+            background-color: #f0f4f8;
         }
-        
+
         /* Main section container */
         .how-it-works-section {
-            background-color: #e3f2fd; /* A light blue background */
+            background-color: #e3fde4;
             color: #0d47a1;
-            padding: 20px 10px; /* Reduced padding for mobile */
+            padding: 50px 20px;
             text-align: center;
         }
 
         /* Section heading */
         .how-it-works-section h2 {
-            font-size: 1.5rem; /* Smaller font for mobile */
+            font-size: 2rem;
             font-weight: 700;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
         }
 
         /* Container for the steps */
         .steps-container {
             position: relative;
-            max-width: 90%; /* Responsive width */
+            max-width: 800px;
             margin: 0 auto;
-            min-height: 200px; /* Ensures space for the content */
+            min-height: 250px;
             overflow: hidden;
         }
 
@@ -46,11 +46,13 @@
             opacity: 0;
             transition: opacity 0.6s ease-in-out;
             width: 100%;
-            padding: 15px;
+            padding: 30px;
+            padding-left: 40px;
+            padding-right: 40px;
             box-sizing: border-box;
             background: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 16px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
         }
 
         /* Active step for display */
@@ -60,12 +62,12 @@
 
         /* Avatar styling */
         .step-card .avatar {
-            width: 40px; /* Smaller avatar */
-            height: 40px;
+            width: 60px;
+            height: 60px;
             background-color: #bbdefb;
             border-radius: 50%;
             display: inline-block;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             background-image: url('https://cdn-icons-png.flaticon.com/512/194/194938.png');
             background-size: cover;
             background-position: center;
@@ -73,28 +75,29 @@
         
         /* Step title */
         .step-card h3 {
-            font-size: 1rem; /* Smaller heading */
+            font-size: 1.25rem;
             margin: 0;
-            margin-bottom: 5px;
-            color: #1565c0;
+            margin-bottom: 8px;
+            color: #000000be;
         }
-
+        
         /* Step description */
         .step-card p {
             margin: 0;
-            font-size: 0.9rem; /* Smaller text */
+            margin-top: 10px;
+            font-size: 1.1rem;
             color: #333;
-            line-height: 1.4;
+            line-height: 1.5;
         }
         
         /* Page numbering */
         .step-card .page-number {
             display: block;
-            margin-top: 10px;
+            margin-top: 15px;
             font-style: italic;
             font-weight: 500;
             color: #1565c0;
-            font-size: 0.8rem;
+            font-size: 0.9rem;
         }
 
         /* Navigation arrows */
@@ -102,12 +105,12 @@
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            font-size: 1.5rem; /* Smaller arrows */
+            font-size: 2rem;
             color: #0d47a1;
             cursor: pointer;
             user-select: none;
-            padding: 5px;
-            background: rgba(255, 255, 255, 0.7);
+            padding: 8px 12px;
+            background:none;
             border-radius: 50%;
             transition: background 0.3s, color 0.3s;
             z-index: 10;
@@ -119,19 +122,70 @@
         }
 
         .left-arrow {
-            left: -5px; /* Adjusting position to be closer to the edge */
+            left: 10px;
         }
 
         .right-arrow {
-            right: -5px;
+            right: 10px;
         }
 
+        /* Media queries for mobile screens */
+        @media (max-width: 768px) {
+            .how-it-works-section {
+                padding: 40px 15px;
+            }
+
+            .how-it-works-section h2 {
+                font-size: 2rem; /* The requested change */
+            }
+
+            .steps-container {
+                max-width: 95%;
+                min-height: 220px;
+            }
+
+            .step-card {
+                padding: 15px;
+                padding-left: 30px;
+                padding-right: 30px;
+            }
+
+            .step-card .avatar {
+                width: 50px;
+                height: 50px;
+            }
+            
+            .step-card h3 {
+                font-size: 1.1rem;
+            }
+
+            .step-card p {
+                margin-top: 8px;
+                font-size: 1rem;
+            }
+            
+            .step-card .page-number {
+                font-size: 0.8rem;
+            }
+
+            .arrow {
+                font-size: 1.7rem;
+            }
+            
+            .left-arrow {
+                left: 5px;
+            }
+
+            .right-arrow {
+                right: 5px;
+            }
+        }
     </style>
 </head>
 <body>
 
 <div class="how-it-works-section">
-    <h2>💬 2How it Works</h2>
+    <h2>💬2 How it Works</h2>
     <div class="steps-container">
         <div class="step-card active">
             <div class="avatar"></div>
