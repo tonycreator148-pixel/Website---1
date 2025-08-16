@@ -320,6 +320,12 @@ body {
   }
 }
 
+@media (max-width: 600px) {
+  .area-check-section {
+    padding: 20px 12px !important;
+    margin: 12px !important;
+  }
+}
 
 /*----------- How it Works - Section -----------*/  
 
@@ -652,6 +658,7 @@ body {
       text-align: center;
       max-width: 400px;
     }
+
 
 
 
