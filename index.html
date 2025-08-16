@@ -1,218 +1,196 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<style>
-.testimonials-section {
-  background: linear-gradient(135deg, #e3f2fd, #ffffff);
-  padding: 40px 15px; /* reduced padding for mobile */
-  font-family: 'Segoe UI', sans-serif;
-  text-align: center;
-  color: #0d47a1;
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How it Works</title>
+    <style>
+        /* General body styling */
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f4f8; /* Light background color */
+        }
+        
+        /* Main section container */
+        .how-it-works-section {
+            background-color: #e3f2fd; /* A light blue background */
+            color: #0d47a1;
+            padding: 20px 10px; /* Reduced padding for mobile */
+            text-align: center;
+        }
 
-.testimonials-section h2 {
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 30px;
-}
+        /* Section heading */
+        .how-it-works-section h2 {
+            font-size: 1.5rem; /* Smaller font for mobile */
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
 
-.testimonial-box {
-  position: relative;
-  max-width: 600px; /* slightly smaller for mobile */
-  margin: 0 auto;
-  min-height: 220px;
-  overflow: hidden;
-}
+        /* Container for the steps */
+        .steps-container {
+            position: relative;
+            max-width: 90%; /* Responsive width */
+            margin: 0 auto;
+            min-height: 200px; /* Ensures space for the content */
+            overflow: hidden;
+        }
 
-.testimonial {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  opacity: 0;
-  transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
-  width: 100%;
-  padding: 20px;
-  box-sizing: border-box;
-  background: white;
-  border-radius: 16px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
-  font-size: 1.1rem;
-}
+        /* Individual step card */
+        .step-card {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.6s ease-in-out;
+            width: 100%;
+            padding: 15px;
+            box-sizing: border-box;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
 
-.testimonial.active {
-  opacity: 1;
-}
+        /* Active step for display */
+        .step-card.active {
+            opacity: 1;
+        }
 
-.testimonial .avatar {
-  width: 50px; /* smaller on mobile */
-  height: 50px;
-  background-color: #bbdefb;
-  border-radius: 50%;
-  display: inline-block;
-  margin-bottom: 12px;
-  background-image: url('https://cdn-icons-png.flaticon.com/512/194/194938.png');
-  background-size: cover;
-  background-position: center;
-}
+        /* Avatar styling */
+        .step-card .avatar {
+            width: 40px; /* Smaller avatar */
+            height: 40px;
+            background-color: #bbdefb;
+            border-radius: 50%;
+            display: inline-block;
+            margin-bottom: 10px;
+            background-image: url('https://cdn-icons-png.flaticon.com/512/194/194938.png');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        /* Step title */
+        .step-card h3 {
+            font-size: 1rem; /* Smaller heading */
+            margin: 0;
+            margin-bottom: 5px;
+            color: #1565c0;
+        }
 
-.testimonial p {
-  margin: 0;
-  font-size: 1rem;
-  color: #333;
-}
+        /* Step description */
+        .step-card p {
+            margin: 0;
+            font-size: 0.9rem; /* Smaller text */
+            color: #333;
+            line-height: 1.4;
+        }
+        
+        /* Page numbering */
+        .step-card .page-number {
+            display: block;
+            margin-top: 10px;
+            font-style: italic;
+            font-weight: 500;
+            color: #1565c0;
+            font-size: 0.8rem;
+        }
 
-.testimonial span {
-  display: block;
-  margin-top: 12px;
-  font-style: italic;
-  font-weight: 500;
-  color: #1565c0;
-}
+        /* Navigation arrows */
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5rem; /* Smaller arrows */
+            color: #0d47a1;
+            cursor: pointer;
+            user-select: none;
+            padding: 5px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 50%;
+            transition: background 0.3s, color 0.3s;
+            z-index: 10;
+        }
 
-/* Arrows */
-.arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 1.8rem; /* smaller on mobile */
-  color: #0d47a1;
-  cursor: pointer;
-  user-select: none;
-  padding: 6px 10px;
-  background: rgba(255,255,255,0.7);
-  border-radius: 50%;
-  transition: background 0.3s;
-  z-index: 10;
-}
+        .arrow:hover {
+            background: rgba(13, 71, 161, 0.8);
+            color: white;
+        }
 
-.arrow:hover {
-  background: rgba(13, 71, 161, 0.8);
-  color: white;
-}
+        .left-arrow {
+            left: -5px; /* Adjusting position to be closer to the edge */
+        }
 
-.left-arrow {
-  left: -10px; /* slightly inside on mobile */
-}
+        .right-arrow {
+            right: -5px;
+        }
 
-.right-arrow {
-  right: -10px;
-}
-
-/* Fluid responsive styles for mobile and small tablets */
-@media (max-width: 768px) {
-  .testimonials-section {
-    padding: clamp(30px, 5vw, 50px) clamp(10px, 5vw, 30px);
-  }
-
-  .testimonials-section h2 {
-    font-size: clamp(1.6rem, 5vw, 2rem);
-    margin-bottom: clamp(20px, 4vw, 30px);
-  }
-
-  .testimonial-box {
-    max-width: 100%;
-    min-height: clamp(220px, 25vw, 260px);
-  }
-
-  .testimonial {
-    padding: clamp(15px, 3vw, 25px);
-    font-size: clamp(0.95rem, 3vw, 1.1rem);
-  }
-
-  .testimonial h3 {
-    font-size: clamp(1rem, 3vw, 1.2rem);
-    margin-bottom: clamp(6px, 2vw, 10px);
-  }
-
-  .testimonial .avatar {
-    width: clamp(45px, 8vw, 60px);
-    height: clamp(45px, 8vw, 60px);
-    margin-bottom: clamp(10px, 2vw, 14px);
-  }
-
-  .testimonial span {
-    margin-top: clamp(10px, 2vw, 14px);
-  }
-
-  .arrow {
-    font-size: clamp(1.5rem, 4vw, 1.8rem);
-    padding: clamp(4px, 1vw, 8px) clamp(6px, 1vw, 12px);
-  }
-
-  .left-arrow {
-    left: clamp(5px, 2vw, 10px);
-  }
-
-  .right-arrow {
-    right: clamp(5px, 2vw, 10px);
-  }
-}
-
-</style>
+    </style>
 </head>
 <body>
 
-<div class="testimonials-section">
-  <h2>💬 1How it Works</h2>
-  <div class="testimonial-box">
-    <div class="testimonial active">
-      <div class="avatar"></div>
-      <h3>Step 1: Check Availability</h3>
-      <p>Enter your area or pincode to see if we deliver in your location.</p>
-      <span> 1 of 4 </span>
-    </div>
-    <div class="testimonial">
-      <div class="avatar"></div>
-      <h3>Step 2: Sign In & Browse</h3>
-      <p>Login and explore a variety of verified mess/tiffin services near you.</p>
-      <span> 2 of 4 </span>
-    </div>
-    <div class="testimonial">
-      <div class="avatar"></div>
-      <h3>Step 3: Pay & Save</h3>
-      <p>Pay securely on our website and get ₹100 cashback on your first order!</p>
-      <span> 3 of 4 </span>
-    </div>
-    <div class="testimonial">
-      <div class="avatar"></div>
-      <h3>Step 4: Enjoy Your Meal</h3>
-      <p>Get delicious, hot, home-cooked food delivered to your doorstep daily.</p>
-      <span> 4 of 4 </span>
-    </div>
+<div class="how-it-works-section">
+    <h2>💬 2How it Works</h2>
+    <div class="steps-container">
+        <div class="step-card active">
+            <div class="avatar"></div>
+            <h3>Step 1: Check Availability</h3>
+            <p>Enter your area or pincode to see if we deliver in your location.</p>
+            <span class="page-number">1 of 4</span>
+        </div>
+        <div class="step-card">
+            <div class="avatar"></div>
+            <h3>Step 2: Sign In & Browse</h3>
+            <p>Login and explore a variety of verified mess/tiffin services near you.</p>
+            <span class="page-number">2 of 4</span>
+        </div>
+        <div class="step-card">
+            <div class="avatar"></div>
+            <h3>Step 3: Pay & Save</h3>
+            <p>Pay securely on our website and get ₹100 cashback on your first order!</p>
+            <span class="page-number">3 of 4</span>
+        </div>
+        <div class="step-card">
+            <div class="avatar"></div>
+            <h3>Step 4: Enjoy Your Meal</h3>
+            <p>Get delicious, hot, home-cooked food delivered to your doorstep daily.</p>
+            <span class="page-number">4 of 4</span>
+        </div>
 
-    <div class="arrow left-arrow">&#10094;</div>
-    <div class="arrow right-arrow">&#10095;</div>
-  </div>
+        <div class="arrow left-arrow">&#10094;</div>
+        <div class="arrow right-arrow">&#10095;</div>
+    </div>
 </div>
 
 <script>
-const testimonials = document.querySelectorAll('.testimonial');
-let current = 0;
+    const steps = document.querySelectorAll('.step-card');
+    let currentStep = 0;
 
-function showTestimonial(index) {
-  testimonials.forEach((t) => t.classList.remove('active'));
-  testimonials[index].classList.add('active');
-}
+    function showStep(index) {
+        steps.forEach(step => step.classList.remove('active'));
+        steps[index].classList.add('active');
+    }
 
-let autoSlide = setInterval(() => {
-  current = (current + 1) % testimonials.length;
-  showTestimonial(current);
-}, 5000);
+    // Auto-slide functionality
+    let autoSlideInterval = setInterval(() => {
+        currentStep = (currentStep + 1) % steps.length;
+        showStep(currentStep);
+    }, 5000);
 
-document.querySelector('.left-arrow').addEventListener('click', () => {
-  clearInterval(autoSlide);
-  current = (current - 1 + testimonials.length) % testimonials.length;
-  showTestimonial(current);
-});
+    // Manual navigation
+    document.querySelector('.left-arrow').addEventListener('click', () => {
+        clearInterval(autoSlideInterval);
+        currentStep = (currentStep - 1 + steps.length) % steps.length;
+        showStep(currentStep);
+    });
 
-document.querySelector('.right-arrow').addEventListener('click', () => {
-  clearInterval(autoSlide);
-  current = (current + 1) % testimonials.length;
-  showTestimonial(current);
-});
+    document.querySelector('.right-arrow').addEventListener('click', () => {
+        clearInterval(autoSlideInterval);
+        currentStep = (currentStep + 1) % steps.length;
+        showStep(currentStep);
+    });
 </script>
 
 </body>
 </html>
-
-
