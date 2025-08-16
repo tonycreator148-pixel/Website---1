@@ -126,23 +126,42 @@
 
 
 
-// FAQ Section
+document.addEventListener('DOMContentLoaded', () => {
 
-  const accordionItems = document.querySelectorAll('.accordion-item');
+    // --- "More Queries" Button ---
+    const showMoreBtn = document.getElementById('show-more-btn');
+    const hiddenQuestions = document.querySelector('.hidden-questions');
 
-  accordionItems.forEach(item => {
-    const header = item.querySelector('.accordion-header');
+    showMoreBtn.addEventListener('click', () => {
+        hiddenQuestions.classList.toggle('show');
+        showMoreBtn.classList.toggle('active');
 
-    header.addEventListener('click', () => {
-      const currentlyActive = document.querySelector('.accordion-item.active');
-      if (currentlyActive && currentlyActive !== item) {
-        currentlyActive.classList.remove('active');
-      }
-      item.classList.toggle('active');
+        // Toggle button text
+        showMoreBtn.textContent = hiddenQuestions.classList.contains('show') 
+            ? 'Show Less' 
+            : 'More Queries';
     });
-  });
 
+    // --- Accordion Logic ---
+    const accordionContainer = document.querySelector('.accordion');
 
+    accordionContainer.addEventListener('click', (event) => {
+        const header = event.target.closest('.accordion-header');
+        if (!header) return;
+
+        const accordionItem = header.closest('.accordion-item');
+        const currentlyActive = document.querySelector('.accordion-item.active');
+
+        // Close previously active item if it's not the one clicked
+        if (currentlyActive && currentlyActive !== accordionItem) {
+            currentlyActive.classList.remove('active');
+        }
+
+        // Toggle the clicked item
+        accordionItem.classList.toggle('active');
+    });
+
+});
    // Location Permission Modal 
 
     const enableLocationModule = false;    // Set to true to enable the location permission modal
@@ -170,4 +189,5 @@
     function closeLocationModal() {
       document.getElementById('locationModal').classList.remove('active');
     }
+
 
