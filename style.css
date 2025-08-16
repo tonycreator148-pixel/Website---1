@@ -558,7 +558,7 @@ body {
 
   .faq-section {
     background: linear-gradient(135deg, #66a587);
-    padding: 70px 20px;
+    padding: 20px 20px;
     font-family: 'Segoe UI', sans-serif;
     color: #333;
   }
@@ -852,6 +852,7 @@ body {
       text-align: center;
       max-width: 400px;
     }
+
 
 
 
