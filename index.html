@@ -1,73 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Tiffin Finder</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
-  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Header (Example 1 layout + Example 3 search)</title>
+  <style>
+    body { margin: 0; font-family: Arial, sans-serif; }
 
+    /* Example 1 layout (unchanged except actions tweak) */
+    .header {
+      background: #0f172a;
+      color: white;
+      padding: 10px 15px;
+      display: flex;
+      flex-direction: column; /* mobile-first: stack */
+      gap: 10px;
+    }
+    .logo-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      font-size: 20px;
+      font-weight: bold;
+    }
+    .menu {
+      font-size: 18px;
+      padding: 6px 10px;
+      background: #1e293b;
+      border-radius: 6px;
+      cursor: pointer;
+    }
 
-    <link rel="stylesheet" href="Desktop & Mobile Nav Bar.css">
-    <link rel="stylesheet" href="style.css">
+    /* ⬇️ ONLY CHANGE: Search bar styled like Example 3 */
+    .search-container {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      background: #ffffff;
+      border-radius: 9999px;          /* pill */
+      overflow: hidden;               /* clip corners for button */
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+    .search-container input {
+      flex: 1;
+      padding: 10px 14px;
+      border: none;
+      outline: none;
+      font-size: 14px;
+      background: transparent;
+      color: #111827;
+    }
+    .search-container input::placeholder { color: #6b7280; }
+    .search-container button {
+      border: none;
+      background: #10b981;            /* emerald */
+      color: #ffffff;
+      padding: 10px 16px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: opacity .2s ease;
+    }
+    .search-container button:hover { opacity: .9; }
 
-
-  </head>
+    /* Desktop behavior (same as Example 1) */
+    @media (min-width: 768px) {
+      .header {
+        flex-direction: row;          /* inline on larger screens */
+        align-items: center;
+      }
+      .logo-row { flex: 1; }
+      .search-container { flex: 2; max-width: 560px; }
+    }
+  </style>
+</head>
 <body>
 
-<!----------------------------------------- Desktop & Mobile Nav Bar  ----------------------------------------------->
-
-  <!-- Desktop Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-searchbar desktop-nav">
-    <div class="container-fluid">
-      <!-- Brand -->
-      <a class="navbar-brand" href="index.html">TiffinFinder</a>
-
-      <!-- Center Search -->
-      <form class="d-flex mx-auto w-50">
-        <input class="form-control form-control-lg me-2" type="search" placeholder="Search Tiffins" aria-label="Search">
-        <button class="btn btn-warning" type="submit"><i class="fas fa-search"></i></button>
-      </form>
-
-      <!-- Right Side -->
-      <div class="d-flex align-items-center">
-        <!-- Dropdown (3 lines) -->
-        <div class="dropdown me-3">
-          <a href="#" class="text-white" id="dropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="fas fa-bars fa-lg"></i>
-          </a>
-          <ul class="dropdown-menu dropdown-menu-end animate__animated animate__fadeIn" aria-labelledby="dropdownMenuLink">
-            <li><a class="dropdown-item custom-dropdown-item" href="about.html">About Us</a></li>
-            <li><a class="dropdown-item custom-dropdown-item" href="contact.html">Contact Us</a></li>
-            <li><a class="dropdown-item custom-dropdown-item" href="terms.html">Terms & Conditions</a></li>
-            <li><a class="dropdown-item custom-dropdown-item" href="feedback.html">Feedback</a></li>
-          </ul>
-        </div>
-
-        <!-- Sign-In Button -->
-        <button class="btn btn-outline-light" onclick="handleGoogleSignIn()">Sign In</button>
-      </div>
-    </div>
-  </nav>
-
-  <!-- Mobile Navbar -->
-  <div class="header navbar-mobile">
+  <div class="header">
+    <!-- logo and menu in same row -->
     <div class="logo-row">
       <div class="logo">🍴 TiffinWala</div>
-      <!-- Smooth Dropdown integrated here -->
-      <div class="dropdown">
-        <div class="menu">☰</div>
-        <div class="dropdown-content">
-          <a href="index.html">🏠 Home</a>
-          <a href="about.html">ℹ️ About Us</a>
-          <a href="contact.html">📞 Contact</a>
-          <a href="terms.html">📑 Terms</a>
-          <a href="feedback.html">💬 Feedback</a>
-        </div>
-      </div>
+      <div class="menu">☰</div>
     </div>
 
     <div class="search-container">
@@ -75,287 +89,6 @@
       <button>Search</button>
     </div>
   </div>
-
-<!-------------------------------------------- Main Tiffin Image Banner ----------------------------------------------->
-
-
-  <div class="container-fluid mt-4 px-0">
-    <img src="Tiffin Homepage.png" class="banner-img img-fluid w-100" alt="Tiffin Banner">
-
-  </div>
-
-<!-------------------------------------------- Stats Section ----------------------------------------------->
-
-
-  <div class="container stats-section text-center">
-    <div class="row">
-      <div class="col-12 col-md-4">
-        <h4><i class="fas fa-smile"></i> 1000+ Happy Customers</h4>
-      </div>
-      <div class="col-12 col-md-4">
-        <h4><i class="fas fa-check-circle"></i> 500+ Verified Tiffins</h4>
-      </div>
-      <div class="col-12 col-md-4">
-        <h4><i class="fas fa-city"></i> Serving 15+ Cities</h4>
-      </div>
-    </div>
-  </div>
-
-<!-------------------------------------------- Also Available Section ----------------------------------------------->
-
-
-<div class="location-banner">
-  <div class="centered-text">
-    <span class="static-text">We are also available in</span>
-    <span class="animated-location-wrapper">
-      <span class="animated-location" id="rotating-location">Sitabuldi</span>
-    </span>
-  </div>
-</div>
-
-<!-------------------------------------------- CTA Section ----------------------------------------------->
-
-
-<div class="cta-section">
-  <h2>Looking for Healthy, Home-Cooked Food Delivered to Your Door?</h2>
-  <ul>
-    <li><i class="fas fa-check-circle"></i> Affordable Monthly & Weekly Plans</li>
-    <li><i class="fas fa-wallet"></i> Get ₹100 Cashback on Your First Payment</li>
-    <li><i class="fas fa-bolt"></i> Fast & Reliable Daily Delivery</li>
-    <li><span>🍽️</span> Custom Meal Plans (Veg / Non-Veg)</li>
-    <li><span>📍</span> City-Wide Coverage</li>
-  </ul>
-  <a href="#!" class="btn-cta">Sign Up Now & Claim Cashback</a>
-</div>
-
-<!-------------------------------------------- Testimonials Section ----------------------------------------------->
-
-
-<div class="testimonials-section">
-  <h2>💬 What Our Customers Say</h2>
-  <div class="testimonial-box">
-    <div class="testimonial active">
-      <div class="avatar"></div>
-      <p>“Delicious food, just like home!”</p>
-      <span>– Rohan</span>
-    </div>
-    <div class="testimonial">
-      <div class="avatar"></div>
-      <p>“Great value for money. Always on time.”</p>
-      <span>– Priya</span>
-    </div>
-    <div class="testimonial">
-      <div class="avatar"></div>
-      <p>“Tiffins are always hot and fresh. Highly recommended!”</p>
-      <span>– Ankit</span>
-    </div>
-    <div class="testimonial">
-      <div class="avatar"></div>
-      <p>“Healthy and tasty meals, my kids love it too.”</p>
-      <span>– Shreya</span>
-    </div>
-  </div>
-</div>
-
-<!-------------------------------------------- Area Availability Checking Section ----------------------------------------------->
-
-
-<div class="area-check-section">
-  <h2>📍 Search Availability by Area</h2>
-  <p>Enter your area or pincode to check if we deliver near you</p>
-  <div class="area-search-form">
-    <input type="text" id="areaInput" placeholder="Eg. Sitabuldi or 440001" oninput="handleInputChange()">
-    <button onclick="checkAvailability()">Check</button>
-  </div>
-  <div class="availability-result" id="resultBox">✅ Yes! We deliver in your area.</div>
-</div>
-
-<!-------------------------------------------- How It Works - Section ----------------------------------------------->
-
-
-<div class="how-it-works">
-  <h2>🔄 How It Works</h2>
-  <div class="timeline">
-    <div class="timeline-step">
-      <img src="https://img.icons8.com/fluency/48/000000/worldwide-location.png" alt="Location">
-      <h3>Step 1: Check Availability</h3>
-      <p>Enter your area or pincode to see if we deliver in your location.</p>
-    </div>
-    <div class="timeline-step">
-      <img src="https://img.icons8.com/fluency/48/000000/login-rounded.png" alt="Login">
-      <h3>Step 2: Sign In & Browse</h3>
-      <p>Login and explore a variety of verified mess/tiffin services near you.</p>
-    </div>
-    <div class="timeline-step">
-      <img src="https://img.icons8.com/fluency/48/000000/money-transfer.png" alt="Payment">
-      <h3>Step 3: Pay & Save</h3>
-      <p>Pay securely on our website and get ₹100 cashback on your first order!</p>
-    </div>
-    <div class="timeline-step">
-      <img src="https://img.icons8.com/fluency/48/000000/meal.png" alt="Enjoy Meal">
-      <h3>Step 4: Enjoy Your Meal</h3>
-      <p>Get delicious, hot, home-cooked food delivered to your doorstep daily.</p>
-    </div>
-  </div>
-</div>
-
-<!-------------------------------------------- FAQs Section ----------------------------------------------->
-
-
-<div class="faq-section">
-  <h2>❓ Frequently Asked Questions</h2>
-  <div class="accordion" id="faqAccordion">
-
-    <div class="accordion-item">
-      <div class="accordion-header">
-        <span><i class="question-icon">🍛</i>Is the food vegetarian, non-vegetarian, or both?</span>
-        <span class="icon">+</span>
-      </div>
-      <div class="accordion-body"><p>We offer both vegetarian and non-vegetarian options depending on your selection.</p></div>
-    </div>
-
-    <div class="accordion-item">
-      <div class="accordion-header">
-        <span><i class="question-icon">🍴</i>Do you provide trial meals before subscribing?</span>
-        <span class="icon">+</span>
-      </div>
-      <div class="accordion-body"><p>Trial meal availability depends on the individual mess provider.</p></div>
-    </div>
-
-    <div class="accordion-item">
-      <div class="accordion-header">
-        <span><i class="question-icon">💰</i>What are your pricing plans?</span>
-        <span class="icon">+</span>
-      </div>
-      <div class="accordion-body"><p>Monthly plans range from ₹3000 to ₹3500, depending on the mess.</p></div>
-    </div>
-
-    <div class="accordion-item">
-      <div class="accordion-header">
-        <span><i class="question-icon">🚚</i>Are there any hidden charges or delivery fees?</span>
-        <span class="icon">+</span>
-      </div>
-      <div class="accordion-body"><p>No, all delivery charges are already included in your plan.</p></div>
-    </div>
-
-    <div class="accordion-item">
-      <div class="accordion-header">
-        <span><i class="question-icon">📅</i>Do you offer daily, weekly, or monthly subscriptions?</span>
-        <span class="icon">+</span>
-      </div>
-      <div class="accordion-body"><p>We currently offer only monthly subscription plans.</p></div>
-    </div>
-
-    <div class="accordion-item">
-      <div class="accordion-header">
-        <span><i class="question-icon">🕒</i>What time will the food be delivered?</span>
-        <span class="icon">+</span>
-      </div>
-      <div class="accordion-body"><p>Delivery timing varies by mess. Please confirm directly with your selected provider.</p></div>
-    </div>
-
-    <div class="accordion-item">
-      <div class="accordion-header">
-        <span><i class="question-icon">📦</i>Is delivery available on weekends or holidays?</span>
-        <span class="icon">+</span>
-      </div>
-      <div class="accordion-body"><p>Some messes deliver on Sundays and holidays; others may not. Details are shown on each listing.</p></div>
-    </div>
-
-    <div class="accordion-item">
-      <div class="accordion-header">
-        <span><i class="question-icon">🏫</i>Can I order mess in my college or office?</span>
-        <span class="icon">+</span>
-      </div>
-      <div class="accordion-body"><p>Yes, but please confirm with your mess provider.</p></div>
-    </div>
-
-    <div class="accordion-item">
-      <div class="accordion-header">
-        <span><i class="question-icon">👨‍🎓</i>Do you provide food for students/working professionals?</span>
-        <span class="icon">+</span>
-      </div>
-      <div class="accordion-body"><p>Absolutely! Our services are tailored for both students and working professionals.</p></div>
-    </div>
-
-    <div class="accordion-item">
-      <div class="accordion-header">
-        <span><i class="question-icon">⭐</i>Can I see ratings and reviews for each mess?</span>
-        <span class="icon">+</span>
-      </div>
-      <div class="accordion-body"><p>Yes, user ratings and reviews are available for each mess on our website.</p></div>
-    </div>
-
-    <div class="accordion-item">
-      <div class="accordion-header">
-        <span><i class="question-icon">🎁</i>Do you offer cashbacks?</span>
-        <span class="icon">+</span>
-      </div>
-      <div class="accordion-body"><p>Yes! Enjoy ₹100 cashback on your first payment when ordering through our website.</p></div>
-    </div>
-
-  </div>
-</div>
-
-<!-------------------------------------------- Google Ads Section (Optional) ----------------------------------------------->
-<!---
-
-  <div class="container mt-4">
-    <div class="bg-light text-center py-4 rounded border">[ Sponsored Ad Space ]</div>
-  </div>
-
---->
-
-<!-------------------------------------------- Footer Settings ----------------------------------------------->
-<div class="footer">
-  <div class="footer-container">
-
-    <!-- Left: Logo + Text -->
-    <div class="footer-logo">
-      <h2>TiffinWala</h2>
-      <p>Connecting you to the best home-cooked meals in your city. Healthy, affordable, and just a click away!</p>
-    </div>
-
-    <!-- Center: Listing CTA -->
-    <div class="footer-listing-cta">
-      <h3>🍱 Want to List Your Tiffin Service?</h3>
-      <p>Grow your business by reaching hungry students and professionals near you. It’s easy, quick, and free to start.</p>
-      <a href="#">List Your Tiffin</a>
-    </div>
-
-    <!-- Right: Footer Links -->
-    <div class="footer-links">
-      <h3>Quick Links</h3>
-      <a href="index.html">Homepage</a>
-      <a href="about_us.html">About Us</a>
-      <a href="contact.html">Contact Customer Care</a>
-      <a href="terms.html">Terms & Conditions</a>
-      <a href="#">Privacy Policy</a>
-    </div>
-
-  </div>
-
-  <!-- Copyrights Section -->  
-  <div class="footer-bottom">
-    © 2025 TiffinWala. All rights reserved.
-  </div>
-</div>
-
-<!-------------------------------------------- Location Permission Modal & Settings ----------------------------------------------->
-
-
-<div id="locationModal">
-  <div class="modal-content">
-    <h5>Enable Location Services</h5>
-    <p>Allow location access to find tiffin services near you.</p>
-    <button class="btn btn-primary" onclick="getUserLocation()">Enable Location</button>
-    <button class="btn btn-secondary mt-2" onclick="closeLocationModal()">No Thanks</button>
-  </div>
-</div>
-
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="script.js"></script>
 
 </body>
 </html>
