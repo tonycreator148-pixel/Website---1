@@ -293,18 +293,33 @@ body {
     display: none;
   }
 
-  @media (max-width: 600px) {
-    .area-check-section {
-    background: linear-gradient(135deg, #fffde7, #fff);
-    text-align: center;
-    font-family: 'Segoe UI', sans-serif;
-    color: #424242;
-    margin-top: 12px;
-    margin-bottom: 12px;
-    margin-left: 12px;
-    margin-right: 12px;
-    }
+@media (max-width: 600px) {
+  .area-check-section {
+    padding: 20px 12px;   /* shrink top/bottom from 60px → 20px */
+    margin: 12px;         /* adds a little outer breathing space */
   }
+
+  .area-check-section h2 {
+    font-size: 1.5rem;    /* make heading smaller on mobile */
+    margin-bottom: 12px;
+  }
+
+  .area-check-section p {
+    font-size: 0.95rem;   /* smaller text */
+    margin-bottom: 16px;
+  }
+
+  .area-search-form input[type="text"] {
+    width: 100%;          /* full-width input on small screens */
+    max-width: 320px;     /* but not too wide */
+  }
+
+  .area-search-form button {
+    width: 100%;          /* button also full width */
+    max-width: 200px;
+  }
+}
+
 
 /*----------- How it Works - Section -----------*/  
 
@@ -637,6 +652,7 @@ body {
       text-align: center;
       max-width: 400px;
     }
+
 
 
 
