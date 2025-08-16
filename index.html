@@ -4,72 +4,77 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Tiffin Finder</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://accounts.google.com/gsi/client" async defer></script>
-  
-  <link rel="stylesheet" href="style.css">
-  
-</head>
 
+
+    <link rel="stylesheet" href="Desktop & Mobile Nav Bar.css">
+    <link rel="stylesheet" href="style.css">
+
+
+  </head>
 <body>
 
-<!-------------------------------------------- Search Bar and Nav Bar ----------------------------------------------->
+<!----------------------------------------- Desktop & Mobile Nav Bar  ----------------------------------------------->
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-searchbar">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="index.html">TiffinFinder</a>
+  <!-- Desktop Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-searchbar desktop-nav">
+    <div class="container-fluid">
+      <!-- Brand -->
+      <a class="navbar-brand" href="index.html">TiffinFinder</a>
 
-<!-- Search Bar -->
+      <!-- Center Search -->
+      <form class="d-flex mx-auto w-50">
+        <input class="form-control form-control-lg me-2" type="search" placeholder="Search Tiffins" aria-label="Search">
+        <button class="btn btn-warning" type="submit"><i class="fas fa-search"></i></button>
+      </form>
 
-    <form class="d-flex w-50 mx-auto">
-      <input class="form-control me-2" type="search" placeholder="Search mess by area, food type..." aria-label="Search">
-      <button class="btn btn-outline-warning" type="submit">Search</button>
-    </form>
+      <!-- Right Side -->
+      <div class="d-flex align-items-center">
+        <!-- Dropdown (3 lines) -->
+        <div class="dropdown me-3">
+          <a href="#" class="text-white" id="dropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fas fa-bars fa-lg"></i>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end animate__animated animate__fadeIn" aria-labelledby="dropdownMenuLink">
+            <li><a class="dropdown-item custom-dropdown-item" href="about.html">About Us</a></li>
+            <li><a class="dropdown-item custom-dropdown-item" href="contact.html">Contact Us</a></li>
+            <li><a class="dropdown-item custom-dropdown-item" href="terms.html">Terms & Conditions</a></li>
+            <li><a class="dropdown-item custom-dropdown-item" href="feedback.html">Feedback</a></li>
+          </ul>
+        </div>
 
-<!-- Dropdown Menu -->
-    
-      <div class="dropdown me-3">
-      <button class="btn text-white border-0" type="button" id="menuToggle" data-bs-toggle="dropdown" aria-expanded="false">
-        <i class="fas fa-bars fa-lg"></i>
-      </button>
-      <ul class="dropdown-menu dropdown-menu-end animate__animated animate__fadeIn" aria-labelledby="menuToggle">
-        <li><a class="dropdown-item custom-dropdown-item" href="about_us.html">About Us</a></li>
-        <li><a class="dropdown-item custom-dropdown-item" href="contact.html">Contact Us</a></li>
-        <li><a class="dropdown-item custom-dropdown-item" href="terms.html">Terms & Conditions</a></li>
-        <li><a class="dropdown-item custom-dropdown-item" href="#">Feedback</a></li>
-      </ul>
+        <!-- Sign-In Button -->
+        <button class="btn btn-outline-light" onclick="handleGoogleSignIn()">Sign In</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Navbar -->
+  <div class="header navbar-mobile">
+    <div class="logo-row">
+      <div class="logo">🍴 TiffinWala</div>
+      <!-- Smooth Dropdown integrated here -->
+      <div class="dropdown">
+        <div class="menu">☰</div>
+        <div class="dropdown-content">
+          <a href="index.html">🏠 Home</a>
+          <a href="about.html">ℹ️ About Us</a>
+          <a href="contact.html">📞 Contact</a>
+          <a href="terms.html">📑 Terms</a>
+          <a href="feedback.html">💬 Feedback</a>
+        </div>
+      </div>
     </div>
 
-<!-- Google Sign In -->
-    
-      <div class="d-flex">
-      <button class="btn signin-btn" onclick="handleGoogleSignIn()">Sign In</button>
+    <div class="search-container">
+      <input type="text" placeholder="Search meals...">
+      <button>Search</button>
     </div>
   </div>
-</nav>
-
-<!-- Google Identity Integrations -->
-
-<script>
-  function handleGoogleSignIn() {
-    google.accounts.id.initialize({
-      client_id: "537791541680-ljot858jb47ram44dfjcthgjlhk8704h.apps.googleusercontent.com",
-      callback: handleCredentialResponse
-    });
-    google.accounts.id.prompt(); // triggers the popup
-  }
-
-  function handleCredentialResponse(response) {
-    // Decode the JWT token for user info (you can use a real JWT parser)
-    console.log("Encoded JWT ID token: " + response.credential);
-    // You can also store user data in localStorage/sessionStorage if needed
-    window.location.href = "profile.html"; // Redirect to profile page
-  }
-</script>
-
 
 <!-------------------------------------------- Main Tiffin Image Banner ----------------------------------------------->
 
@@ -78,7 +83,6 @@
     <img src="Tiffin Homepage.png" class="banner-img img-fluid w-100" alt="Tiffin Banner">
 
   </div>
-
 
 <!-------------------------------------------- Stats Section ----------------------------------------------->
 
@@ -97,7 +101,6 @@
     </div>
   </div>
 
-
 <!-------------------------------------------- Also Available Section ----------------------------------------------->
 
 
@@ -109,131 +112,6 @@
     </span>
   </div>
 </div>
-
-<script>
-  const locations = [
-    "Sitabuldi",
-    "Dharampeth",
-    "Bharat Nagar",
-    "Nandanvan",
-    "Trimurti Nagar",
-    "Mahal",
-    "Manish Nagar"
-  ];
-
-  let currentLocationIndex = 0;
-  const locationElement = document.getElementById("rotating-location");
-
-  setInterval(() => {
-    currentLocationIndex = (currentLocationIndex + 1) % locations.length;
-    locationElement.style.opacity = 0;
-    setTimeout(() => {
-      locationElement.textContent = locations[currentLocationIndex];
-      locationElement.style.opacity = 1;
-    }, 300);
-  }, 3000);
-</script>
-
-
-<!-------------------------------------------- Location Permission Modal & Settings ----------------------------------------------->
-
-
-<div id="locationModal">
-  <div class="modal-content">
-    <h5>Enable Location Services</h5>
-    <p>Allow location access to find tiffin services near you.</p>
-    <button class="btn btn-primary" onclick="getUserLocation()">Enable Location</button>
-    <button class="btn btn-secondary mt-2" onclick="closeLocationModal()">No Thanks</button>
-  </div>
-</div>
-
-<script>
-    const enableLocationModule = false;
-
-    window.onload = () => {
-      if (enableLocationModule) {
-        setTimeout(() => {
-          document.getElementById('locationModal').classList.add('active');
-        }, 5000);
-      }
-    }
-
-    function getUserLocation() {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition((position) => {
-          closeLocationModal();
-        }, () => {
-          closeLocationModal();
-        });
-      } else {
-        closeLocationModal();
-      }
-    }
-
-    function closeLocationModal() {
-      document.getElementById('locationModal').classList.remove('active');
-    }
-  </script>
-
-
-<!-------------------------------------------- Featured Mess Section ----------------------------------------------->
-
-
-<!--
-
-<div class="container">
-  <h3 class="my-4">Top Tiffin Services Near You</h3>
-  <div class="row gx-3 gy-4">
-
-    <div class="card mess-card mb-3 mx-2" style="width: 18rem;">
-      <img src="sample.png" class="card-img-top" alt="Tiffin Image">
-      <div class="card-body">
-        <h5 class="card-title">Maa's Tiffin</h5>
-        <p class="mb-1 text-success"><i class="fas fa-circle" style="font-size: 8px; color: green;"></i> <b>VEG</b></p>
-        <p class="card-text"><b>Ratings:</b> ⭐️⭐️⭐️⭐️⭐️</p>
-        <p class="card-text"><b>Price:</b> ₹3000/month</p>
-        <a href="#" class="btn btn-warning">View Details</a>
-      </div>
-    </div>
-
-    <div class="card mess-card mb-3 mx-2" style="width: 18rem;">
-      <img src="sample.png" class="card-img-top" alt="Tiffin Image">
-      <div class="card-body">
-        <h5 class="card-title">Swadisht Kitchen</h5>
-        <p class="mb-1 text-danger"><i class="fas fa-circle" style="font-size: 8px; color: red;"></i> <b>NON-VEG</b></p>
-        <p class="card-text"><b>Ratings:</b>⭐️⭐️⭐️⭐️</p>
-        <p class="card-text"><b>Price:</b> ₹3500/month</p>
-        <a href="#" class="btn btn-warning">View Details</a>
-      </div>
-    </div>
-
-    <div class="card mess-card mb-3 mx-2" style="width: 18rem;">
-      <img src="sample.png" class="card-img-top" alt="Tiffin Image">
-      <div class="card-body">
-        <h5 class="card-title">HomeStyle Meals</h5>
-        <p class="mb-1 text-success"><i class="fas fa-circle" style="font-size: 8px; color: green;"></i> <b>VEG</b></p>
-        <p class="card-text"><b>Ratings:</b> ⭐️⭐️</p>
-        <p class="card-text"><b>Price:</b> ₹3200/month</p>
-        <a href="#" class="btn btn-warning">View Details</a>
-      </div>
-    </div>
-
-    <div class="card mess-card mb-3 mx-2" style="width: 18rem;">
-      <img src="sample.png" class="card-img-top" alt="Tiffin Image">
-      <div class="card-body">
-        <h5 class="card-title">TiffinXpress</h5>
-        <p class="mb-1 text-danger"><i class="fas fa-circle" style="font-size: 8px; color: red;"></i> <b>NON-VEG</b></p>
-        <p class="card-text"><b>Ratings:</b> ⭐️⭐️⭐️</p>
-        <p class="card-text"><b>Price:</b> ₹3300/month</p>
-        <a href="#" class="btn btn-warning">View Details</a>
-      </div>
-    </div>
-
-
-  </div>
-</div>
-
--->
 
 <!-------------------------------------------- CTA Section ----------------------------------------------->
 
@@ -249,7 +127,6 @@
   </ul>
   <a href="#!" class="btn-cta">Sign Up Now & Claim Cashback</a>
 </div>
-
 
 <!-------------------------------------------- Testimonials Section ----------------------------------------------->
 
@@ -280,18 +157,6 @@
   </div>
 </div>
 
-<script>
-  const testimonials = document.querySelectorAll('.testimonial');
-  let current = 0;
-
-  setInterval(() => {
-    testimonials[current].classList.remove('active');
-    current = (current + 1) % testimonials.length;
-    testimonials[current].classList.add('active');
-  }, 5000); // 5 seconds
-</script>
-
-
 <!-------------------------------------------- Area Availability Checking Section ----------------------------------------------->
 
 
@@ -304,36 +169,6 @@
   </div>
   <div class="availability-result" id="resultBox">✅ Yes! We deliver in your area.</div>
 </div>
-
-<script>
-  const areaInput = document.getElementById('areaInput');
-  const resultBox = document.getElementById('resultBox');
-  const availableAreas = ['sitabuldi', 'dharampeth', '440001', 'bajaj nagar', 'bharat nagar', '440013'];
-
-  function checkAvailability() {
-    const area = areaInput.value.trim().toLowerCase();
-
-    if (area === '') {
-      resultBox.style.color = '#d32f2f';
-      resultBox.innerText = '⚠️ Please enter an area or pincode.';
-    } else if (availableAreas.includes(area)) {
-      resultBox.style.color = '#2e7d32';
-      resultBox.innerText = '✅ Yes! We deliver in your area.';
-    } else {
-      resultBox.style.color = '#d32f2f';
-      resultBox.innerText = '❌ Sorry, we don’t currently serve this location.';
-    }
-
-    resultBox.style.display = 'block';
-  }
-
-  function handleInputChange() {
-    if (areaInput.value.trim() === '') {
-      resultBox.style.display = 'none';
-    }
-  }
-</script>
-
 
 <!-------------------------------------------- How It Works - Section ----------------------------------------------->
 
@@ -363,8 +198,6 @@
     </div>
   </div>
 </div>
-
-
 
 <!-------------------------------------------- FAQs Section ----------------------------------------------->
 
@@ -464,29 +297,14 @@
   </div>
 </div>
 
-<script>
-  const accordionItems = document.querySelectorAll('.accordion-item');
-
-  accordionItems.forEach(item => {
-    const header = item.querySelector('.accordion-header');
-
-    header.addEventListener('click', () => {
-      const currentlyActive = document.querySelector('.accordion-item.active');
-      if (currentlyActive && currentlyActive !== item) {
-        currentlyActive.classList.remove('active');
-      }
-      item.classList.toggle('active');
-    });
-  });
-</script>
-
 <!-------------------------------------------- Google Ads Section (Optional) ----------------------------------------------->
-
+<!---
 
   <div class="container mt-4">
     <div class="bg-light text-center py-4 rounded border">[ Sponsored Ad Space ]</div>
   </div>
 
+--->
 
 <!-------------------------------------------- Footer Settings ----------------------------------------------->
 <div class="footer">
@@ -523,6 +341,21 @@
   </div>
 </div>
 
- 
+<!-------------------------------------------- Location Permission Modal & Settings ----------------------------------------------->
+
+
+<div id="locationModal">
+  <div class="modal-content">
+    <h5>Enable Location Services</h5>
+    <p>Allow location access to find tiffin services near you.</p>
+    <button class="btn btn-primary" onclick="getUserLocation()">Enable Location</button>
+    <button class="btn btn-secondary mt-2" onclick="closeLocationModal()">No Thanks</button>
+  </div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="script.js"></script>
+
 </body>
 </html>
